@@ -1,0 +1,34 @@
+{% extends 'base/layout.html' %}
+
+{% block HeaderLinks %}
+{% endblock %}
+
+{% block main %}
+
+    <div style="text-align: center">
+        <h1>ورود</h1>
+
+        <br>
+
+        <form action="{% url 'login' %}" method="post" id="edit-form">
+            {% csrf_token %}
+
+            {{ login_form.email }}
+            {{ login_form.email.errors }}
+
+            <br/>
+            <br/>
+
+            {{ login_form.password }}
+            {{ login_form.password.errors }}
+
+            <br/>
+            <br/>
+
+            <button class="btn btn-primary" id="register-butt" type="submit">ورود</button>
+        </form>
+
+    </div>
+
+
+{% endblock %}

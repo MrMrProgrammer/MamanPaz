@@ -1,0 +1,66 @@
+{% extends 'base/layout.html' %}
+{% load static %}
+
+{% block HeaderLinks %}
+    <link rel="stylesheet" href="{% static 'css/Moms/MomsProfile-style.css' %}">
+{% endblock %}
+
+{% block main %}
+
+    <div class="row mom-profile-box text-center">
+        <div class="col-12">
+
+            <img id="mom-image"  src="{{ mom.profile_photo.url }}">
+
+            <br/>
+            <br/>
+
+            <p>مامان {{ mom.user.first_name }}</p>
+
+            <p>امتیاز مامان</p>
+
+            <p>تعداد فروش</p>
+
+            <p>تعداد غذای فعال</p>
+
+        </div>
+
+    </div>
+
+    {% for food in foods %}
+
+        <br>
+
+
+        <div class="col-12 foods text-center">
+            <div class="row">
+                <div class="col-12">
+                    <img class="food-img" src="{{ food.food_photo.url }}">
+                </div>
+
+                <div class="row">
+                    <div class="col-6">
+                        <p>{{ food.food_name }}</p>
+                    </div>
+                    <div class="col-6">
+                        <p>{{ food.food_price }}</p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-6">
+                        <a href="{% url 'MomProfile' mom_id=mom.id %}">
+                            <p>مامان {{ food.mom.first_name }}</p>
+                        </a>
+                    </div>
+                    <div class="col-6">
+                        <p>امتیاز</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    {% endfor %}
+
+{% endblock %}

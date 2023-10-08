@@ -1,0 +1,7 @@
+{% extends 'base/layout.html' %}
+
+{% block main %}
+    {% for order in orders %}
+        <h1>{{ order }}</h1>
+    {% endfor %}
+{% endblock %}

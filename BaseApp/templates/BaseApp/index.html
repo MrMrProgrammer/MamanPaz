@@ -1,0 +1,14 @@
+{% extends 'base/layout.html' %}
+
+{% block HeaderLinks %}
+{% endblock %}
+
+{% block main %}
+
+    <h3>سلام {{ request.user.first_name }} 👋🏻</h3>
+    {% if request.user.is_mom %}
+    	<p>مادر</p>
+    {% endif %}
+
+
+{% endblock %}

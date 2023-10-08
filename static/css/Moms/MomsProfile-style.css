@@ -1,0 +1,21 @@
+.mom-profile-box {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px black;
+    border: 1px solid black;
+    padding: 10px;
+
+}
+
+#mom-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 1px solid #7e7e7e;
+}
+
+.food-img {
+    border: 1px solid #545454;
+    border-radius: 10px;
+}

@@ -1,0 +1,53 @@
+{% extends 'base/layout.html' %}
+
+{% block HeaderLinks %}
+{% endblock %}
+
+{% block main %}
+
+    <div style="text-align: center">
+        <h1>ویرایش پروفایل کاربر</h1>
+
+        <br>
+
+        <form action="{% url 'UpdateUserProfile' %}" method="post" id="edit-form">
+            {% csrf_token %}
+
+            {{ edit_form.first_name }}
+            {{ edit_form.first_name.errors }}
+
+            <br/>
+            <br/>
+
+            {{ edit_form.last_name }}
+            {{ edit_form.last_name.errors }}
+
+            <br/>
+            <br/>
+
+            {{ edit_form.email }}
+            {{ edit_form.email.errors }}
+
+            <br/>
+            <br/>
+
+            {{ edit_form.phone_number }}
+            {{ edit_form.phone_number.errors }}
+
+            <br/>
+            <br/>
+
+            {{ edit_form.address }}
+            {{ edit_form.address.errors }}
+
+            <br/>
+            <br/>
+
+            <button class="btn btn-primary" id="register-butt" type="submit">ذخیره اطلاعات مشتری</button>
+
+        </form>
+
+    </div>
+
+
+{% endblock %}

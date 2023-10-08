@@ -1,0 +1,149 @@
+@font-face {
+    src: url("../../font/IranianSans.ttf");
+    font-family: 'IRANsans';
+}
+
+@font-face {
+    src: url("../../font/Yekan.ttf");
+    font-family: 'Yekan';
+}
+
+body {
+    font-family: 'Yekan';
+    direction: rtl;
+}
+
+#header {
+    width: 100%;
+    height: 100px;
+    background-color: gainsboro;
+}
+
+.container-fluid {
+    padding: 0;
+}
+
+
+body {
+    direction: rtl;
+}
+
+
+/* Add your custom CSS styles here */
+
+/* Optional: Customize the header styles */
+header {
+    background-color: #ffffff;
+    /* padding: 15px 0; */
+    font-size: 1rem;
+    font-family: 'Yekan';
+    /* font-family: Tahoma; */
+}
+
+.navbar-brand img {
+    max-height: 50px; /* Adjust the height of your logo */
+}
+
+.navbar-nav .nav-link {
+    color: #000000;
+    /* margin-right: 20px; Adjust the spacing between menu items */
+}
+
+.navbar-toggler-icon {
+    background-color: #ffffff;
+}
+
+/* Optional: Change the color of links on hover */
+.navbar-nav .nav-link:hover {
+    color: #ff5851;
+}
+
+.log-butt {
+    background-color: #ff5851;
+    border-radius: 10px;
+    color: white;
+    margin: 0 10px 0 10px;
+}
+
+.co-butt-a {
+    color: #ff5851;
+}
+
+.co-butt {
+    border: 2px solid #ff5851;
+    border-radius: 10px;
+    margin: 0 20px 0 20px;
+    color: #ff5851;
+}
+
+#log-bt {
+    color: white;
+}
+
+#log-bt:hover {
+    color: #ff8d89;
+}
+
+
+/* افزودن فضای مورد نیاز بین فوتر و محتوای صفحه */
+body {
+    margin-bottom: 100px;
+}
+
+footer {
+    /*background-color: #cfd8dc !important;*/
+    padding: 8px 0;
+    text-align: center;
+    font-family: 'IRANsans';
+    /*box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);*/
+
+}
+
+footer h4 {
+    color: #333;
+    font-size: 16px;
+}
+
+footer p {
+    color: #666;
+}
+
+footer ul {
+    list-style: none;
+    padding: 0;
+}
+
+footer li {
+    margin-bottom: 10px;
+    color: #777;
+}
+
+
+.end-footer {
+    background-color: red !important;
+    width: 100%;
+    height: 200px;
+}
+
+.fixed-bottom {
+    background-color: black;
+    opacity: 80%;
+    padding: 10px;
+}
+
+.fixed-bottom h4 {
+    color: white;
+}
+
+.fixed-bottom a {
+    color: white;
+    text-decoration: none;
+}
+
+
+
+#profile_mom_photo {
+ width: 100px;
+ height: 100px;
+ border-radius: 50%;
+}
