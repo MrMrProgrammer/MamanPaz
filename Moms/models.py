@@ -43,7 +43,7 @@ class MomsModel(models.Model):
         return self.user.first_name + ' ' + self.user.last_name
 
 class FoodsModel(models.Model):
-    mom = models.ForeignKey(User, on_delete=models.CASCADE)
+    mom = models.ForeignKey(MomsModel, on_delete=models.CASCADE)
     food_name = models.CharField(max_length=100)
     food_price = models.IntegerField()
     food_order = models.IntegerField()

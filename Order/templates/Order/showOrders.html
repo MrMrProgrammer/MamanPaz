@@ -2,6 +2,9 @@
 
 {% block main %}
     {% for order in orders %}
-        <h1>{{ order }}</h1>
+        <p>{{ order.products }}</p>
+        <p>{{ order.count }}</p>
+        <p>{{ order.date }}</p>
+        <p>{{ order.time }}</p>
     {% endfor %}
 {% endblock %}

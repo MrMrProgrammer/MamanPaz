@@ -1,0 +1,33 @@
+#food-photo {
+    border-radius: 10px;
+    border: 1px solid #6b6b6b;
+}
+
+.food-detail {
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 10px;
+}
+.dastor-pokht {
+    text-align: center;
+    font-size: 18px;
+
+}
+
+#counter{
+    display: inline;
+    /*border: 1px solid #808080FF;*/
+    /*border-radius: 5px;*/
+    padding: 10px;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+#plus-icon {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+#success {
+    display: none;
+}

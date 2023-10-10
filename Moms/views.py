@@ -147,3 +147,16 @@ class FoodListView(ListView):
     queryset = FoodsModel.objects.all()
     context_object_name = 'foods'
     # paginate_by = 4
+
+
+def FoodDetails(request, food_id):
+
+    food = FoodsModel.objects.filter(id=food_id).first()
+    moms = MomsModel.objects.all()
+
+    context = {
+        'food': food,
+        'moms' : moms,
+    }
+
+    return render(request, 'Moms/FoodDetails.html', context)

@@ -49,8 +49,9 @@
 
                 <div class="row">
                     <div class="col-6">
-                        <a href="{% url 'MomProfile' mom_id=mom.id %}">
-                            <p>مامان {{ food.mom.first_name }}</p>
+                        <a href="{% url 'MomProfile' mom_id=mom.user.id %}">
+                            <img style="display: inline;" class="mom-profile" src="{{ mom.profile_photo.url }}"/>
+                            <p style="display: inline;">مامان {{ food.mom.first_name }}</p>
                         </a>
                     </div>
                     <div class="col-6">

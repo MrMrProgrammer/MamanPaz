@@ -1,0 +1,64 @@
+{% extends 'base/layout.html' %}
+{% load static %}
+
+{% block HeaderLinks %}
+    <link rel="stylesheet" href="{% static 'css/Order/showCart-style.css' %}">
+{% endblock %}
+
+{% block main %}
+
+
+
+        {% if order_details %}
+            <div class="main-box">
+                <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>نام غذا</th>
+                        <th>مامان</th>
+                        <th>قیمت</th>
+                        <th>تعداد</th>
+                        <th>قیمت کل</th>
+                    </tr>
+                    </thead>
+
+                    {% for order in order_details %}
+                        <tbody>
+                        <tr>
+                            <td>
+                                <a class="remove-icon" href="{% url 'removePerOrder' orderDetailId=order.id %}">
+                                    ❌
+                                </a>
+                            </td>
+                            <td>{{ order.food.food_name }}</td>
+                            <td>{{ order.food }}</td>
+                            <td>{{ order.food.food_price }}</td>
+                            <td>{{ order.count }}</td>
+                            <td>{% widthratio order.food.food_price 1 order.count %}</td>
+                            {#                            <td>{{ order.food.food_price | mul:order.count }}</td>#}
+                            {#                            <td>{{ order.food.food_price}}</td>#}
+                        </tr>
+                        </tbody>
+                    {% endfor %}
+                </table>
+                <div class="text-center">
+                    <p class="text-center btn btn-success">مجموع سبد خرید شما : {{ sumCart }} تومان</p>
+                    <a href="">
+                        <P class="text-center btn btn-primary">پرداخت</P>
+                    </a>
+                </div>
+            </div>
+            </div>
+        {% else %}
+            <h1 class="text-center "> سبد خرید شما خالی است </h1>
+        {% endif %}
+
+
+{% endblock %}
+
+
+{% for order in order_details %}
+    <p>{{ order }}</p>
+{% endfor %}

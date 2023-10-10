@@ -15,12 +15,12 @@
         <div class="row moms-box text-center">
 
             <div class="col-2">
-{#                <a href="{% url 'MomProfile' mom_id=mom.id %}">#}
+                <a href="{% url 'MomProfile' mom_id=mom.user.id %}">
                     <div class="mom-box">
-                        <img style="display: inline" class="mom-profile" src="{{ mom.profile_photo.url }}"/>
+    {#                        <img style="display: inline" class="mom-profile" src="{{ mom.profile_photo.url }}"/>#}
                         <p style="display: inline">مامان {{ mom.user.first_name }}</p>
                     </div>
-{#                </a>#}
+                </a>
             </div>
 
             <div class="col-2">

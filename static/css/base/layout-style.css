@@ -28,6 +28,11 @@ body {
     direction: rtl;
 }
 
+a {
+    text-decoration: none;
+    color: black;
+}
+
 
 /* Add your custom CSS styles here */
 

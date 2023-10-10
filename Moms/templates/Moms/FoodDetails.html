@@ -1,0 +1,63 @@
+{% extends 'base/layout.html' %}
+{% load static %}
+
+{% block HeaderLinks %}
+    <link rel="stylesheet" href="{% static 'css/Moms/FoodDetails-style.css' %}">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+
+{% endblock %}
+
+{% block main %}
+
+    <div class="row">
+        <div class="col-12 text-center">
+            <img id="food-photo" src="{{ food.food_photo.url }}"/>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="food-detail">
+        <div class="row text-center">
+            <div class="col-6">{{ food }}</div>
+            <div class="col-6">{{ food.food_price }}</div>
+        </div>
+        <div class="row text-center">
+            <div class="col-6">
+                <a href="{% url 'MomProfile' mom_id=food.mom_id %}">
+                    <img style="display: inline;" class="mom-profile" src="{{ food.mom_id.profile_photo }}"/>
+                    <p style="display: inline">مامان {{ food.mom_id.first_name }}</p>
+                </a>
+            </div>
+            <div class="col-6">امتیاز غذا</div>
+        </div>
+
+        <hr/>
+
+        <p class="dastor-pokht">دستور پخت</p>
+        <p>{{ food.food_recipe }}</p>
+
+        <hr/>
+
+        <br/>
+
+        <div class="row text-center">
+            <div id="count" class="col-12">
+                <button onclick="oppositeCount()" class="btn btn-primary">-</button>
+                <p id="counter" >4</p>
+                <button onclick="addCount()" class="btn btn-primary">+</button>
+            </div>
+        </div>
+
+        <br/>
+
+        <div class="row">
+            <div class="col-12 text-center">
+                <button id="addToOrderBtn" onclick="addFoodToOrder({{ food.id }})" class="text-center btn btn-danger"> <span id="plus-icon">+</span> افزودن به سبد خرید</button>
+                <button id="success" class="text-center btn btn-success"> غذا با موفقیت به سبد خرید اضافه شد </button>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
