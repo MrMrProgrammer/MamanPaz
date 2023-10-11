@@ -32,8 +32,9 @@ function addFoodToOrder(food_id) {
             addBtn.style.display = "inline-block";
             successBtn.style.display = "none";
 
-        }, 1000);
+        }, 1500);
 
         console.log("ok");
     });
 }
+

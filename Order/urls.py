@@ -7,5 +7,5 @@ urlpatterns = [
     path('calcute-order-count', views.CalculateOrder, name='calcute_order_count'),
     path('show-cart', views.ShowCart, name='Show-Cart'),
     path('remove-per-order/<int:orderDetailId>', views.removePerOrder, name="removePerOrder"),
-
+    path('showMomOrders', views.showMomOrders, name='showMomOrders'),
 ]

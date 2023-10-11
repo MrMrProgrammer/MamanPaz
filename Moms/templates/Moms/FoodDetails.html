@@ -26,8 +26,16 @@
         <div class="row text-center">
             <div class="col-6">
                 <a href="{% url 'MomProfile' mom_id=food.mom_id %}">
-                    <img style="display: inline;" class="mom-profile" src="{{ food.mom_id.profile_photo }}"/>
-                    <p style="display: inline">مامان {{ food.mom_id.first_name }}</p>
+                    <img style="display: inline;" class="mom-profile" src="{% url 'getMomImage' mom_id=food.mom_id %}"/>
+                    {% for mom in moms %}
+
+                        {% if mom.user.id == food.mom_id %}
+
+                            <p style="display: inline">مامان {{ mom.user.first_name }}</p>
+
+                        {% endif %}
+
+                    {% endfor %}
                 </a>
             </div>
             <div class="col-6">امتیاز غذا</div>
@@ -45,7 +53,7 @@
         <div class="row text-center">
             <div id="count" class="col-12">
                 <button onclick="oppositeCount()" class="btn btn-primary">-</button>
-                <p id="counter" >4</p>
+                <p id="counter">4</p>
                 <button onclick="addCount()" class="btn btn-primary">+</button>
             </div>
         </div>
@@ -54,8 +62,20 @@
 
         <div class="row">
             <div class="col-12 text-center">
-                <button id="addToOrderBtn" onclick="addFoodToOrder({{ food.id }})" class="text-center btn btn-danger"> <span id="plus-icon">+</span> افزودن به سبد خرید</button>
-                <button id="success" class="text-center btn btn-success"> غذا با موفقیت به سبد خرید اضافه شد </button>
+                {% if request.user.is_authenticated %}
+
+                    <button id="addToOrderBtn" onclick="addFoodToOrder({{ food.id }})"
+                            class="text-center btn btn-danger">
+                        <span id="plus-icon">+</span> افزودن به سبد خرید
+                    </button>
+                    <button id="success" class="text-center btn btn-success"> غذا با موفقیت به سبد خرید اضافه شد
+                    </button>
+                {% else %}
+                    <button id="showAlert" onclick="alert('کاربرگرامی برای افزودن غذا به سبد خرید باید ابتدا وارد حساب کاربری خود شوید.')" class="text-center btn btn-danger">
+                    <span id="plus-icon">+</span> افزودن به سبد خرید
+                    </button>
+                {% endif %}
+
             </div>
         </div>
     </div>

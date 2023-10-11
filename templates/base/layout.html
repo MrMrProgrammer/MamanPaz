@@ -9,6 +9,9 @@
         <link rel="stylesheet" href="{% static 'css/base/layout-style.css' %}"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+{#        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>#}
+{#        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>#}
+
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
         <link rel="icon" type="image/x-icon" href="{% static 'image/icons/site-logo.png' %}">
 
@@ -52,12 +55,11 @@
                             <li class="nav-item co-butt">
                                 <a class="nav-link co-butt-a" href="#">پنل نهار شرکتی</a>
                             </li>
-                            {% if request.user.is_authenticated %}
 
+                            {% if request.user.is_authenticated %}
                                 <li class="nav-item log-butt">
                                     <a id="log-bt" class="nav-link" href="{% url 'Show-Cart' %}">
                                         <i class="fas fa-shopping-cart"></i> سبد خرید
-{#                                        سبد خرید (<span id="backet-count">2</span>)#}
                                     </a>
                                 </li>
 
@@ -71,6 +73,10 @@
                                 {% if  request.user.is_mom %}
                                     <li class="nav-item log-butt">
                                         <a id="log-bt" class="nav-link" href="{% url 'UpdateMomProfile' %}">ویرایش پروفایل مامان</a>
+                                    </li>
+
+                                    <li class="nav-item mom-order">
+                                        <a id="log-bt" class="nav-link mom-order" href="{% url 'showMomOrders' %}">سفارش ها</a>
                                     </li>
                                 {% endif %}
 

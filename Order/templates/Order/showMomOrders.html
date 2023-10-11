@@ -1,0 +1,52 @@
+{% extends 'base/layout.html' %}
+{% load static %}
+
+{% block HeaderLinks %}
+    <link rel="stylesheet" href="{% static 'css/Order/showCart-style.css' %}">
+{% endblock %}
+
+{% block main %}
+
+    {% if momOrders %}
+        <div class="main-box">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>نام غذا</th>
+                        <th>تعداد</th>
+                        <th>سفارش دهنده</th>
+                        <th>تلفن تماس</th>
+                        <th>آدرس</th>
+                        <th>ایمیل</th>
+                    </tr>
+                    </thead>
+
+                    {% for order in momOrders %}
+
+                        <tbody>
+                        <tr>
+                            <td>{{ order.food.food_name }}</td>
+                            <td>{{ order.count }}</td>
+                            <td>{{ order.order.user.get_full_name }}</td>
+                            <td>{{ order.order.user.phone_number }}</td>
+                            <td>{{ order.order.user.address }}</td>
+                            <td>{{ order.order.user.email }}</td>
+
+                        </tr>
+                        </tbody>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    {% else %}
+        <h1 class="text-center "> متاسفانه سفارشی وجود ندارد :( </h1>
+    {% endif %}
+
+
+{% endblock %}
+
+
+{% for order in order_details %}
+    <p>{{ order }}</p>
+{% endfor %}

@@ -1,8 +1,10 @@
-from django.http import HttpRequest, HttpResponse, JsonResponse
+from django.http import HttpRequest, HttpResponse, JsonResponse, HttpResponseNotFound
 from django.shortcuts import render, redirect
 from django.views.generic import ListView
 from .models import Order, OrderDetail
 from Moms.models import FoodsModel
+from BaseApp.models import User
+from Moms.models import MomsModel
 
 
 def add_to_order(request: HttpRequest):
@@ -69,3 +71,22 @@ def removePerOrder(request: HttpRequest, orderDetailId):
     OrderDetail.objects.filter(order_id=order_id, id=orderDetailId).delete()
 
     return redirect('Show-Cart')
+
+
+def showMomOrders(request: HttpRequest):
+    user_id = request.user.id
+
+    is_mom = User.objects.filter(id=request.user.id, is_mom=True)
+
+    if is_mom:
+        mom_id = MomsModel.objects.filter(user_id=request.user.id).first()
+
+        momOrders = OrderDetail.objects.filter(food__mom_id=mom_id.id, is_paid=True)
+
+        context = {
+            'momOrders': momOrders,
+        }
+
+        return render(request, 'Order/showMomOrders.html', context)
+    else:
+        return HttpResponseNotFound()

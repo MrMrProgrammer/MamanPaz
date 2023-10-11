@@ -143,20 +143,36 @@ def MomProfile(request, mom_id):
 
 class FoodListView(ListView):
     model = FoodsModel
-    template_name = 'Moms/MomsFoods.html'
     queryset = FoodsModel.objects.all()
+    template_name = 'Moms/MomsFoods.html'
     context_object_name = 'foods'
-    # paginate_by = 4
+    paginate_by = 9
+
+    # def getMomProfile(self, mom_id):
+    #     mom = MomsModel.objects.filter(id=mom_id).first()
+    #     profile = mom.profile_photo.url
+    #     return HttpResponse(profile)
+
 
 
 def FoodDetails(request, food_id):
-
     food = FoodsModel.objects.filter(id=food_id).first()
     moms = MomsModel.objects.all()
 
     context = {
         'food': food,
-        'moms' : moms,
+        'moms': moms,
     }
 
     return render(request, 'Moms/FoodDetails.html', context)
+
+
+def getMomProfile(request, mom_id):
+    mom = MomsModel.objects.filter(id=mom_id).first()
+    profile = mom.profile_photo.url
+    return redirect(profile)
+
+def getMomName(request, mom_id):
+    mom = MomsModel.objects.filter(id=mom_id).first()
+    name = mom.user
+    return redirect(name    )

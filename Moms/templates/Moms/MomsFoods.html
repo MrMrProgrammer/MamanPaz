@@ -3,41 +3,84 @@
 
 {% block HeaderLinks %}
     <link rel="stylesheet" href="{% static 'css/Moms/MomsFoods-style.css' %}"/>
+
 {% endblock %}
 
 {% block main %}
 
+    <div id="header-box">
+        <img id="pot-icon" src="{% static 'image/icons/pot.png' %}"/>
+        <h1>همکارت رو به یه ناهار خونگی مهمون کن.</h1>
+    </div>
+
     <div class="row">
         {% for food in foods %}
             <div class="col-4 food-box text-center">
+                <a href="{% url 'FoodDetails' food_id=food.id %}">
+                    <div class="inner-box">
+                        <div class="row">
+                            <div class="col-12">
+                                <img class="food-img" src="{{ food.food_photo.url }}">
+                            </div>
+                        </div>
 
-                <div class="row">
-                    <div class="col-12">
-                        <img class="food-img" src="{{ food.food_photo.url }}">
-                    </div>
-                </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <p>{{ food.food_name }}</p>
+                            </div>
+                            <div class="col-6">
+                                <p>{{ food.food_price }}</p>
+                            </div>
+                        </div>
 
-                <div class="row">
-                    <div class="col-6">
-                        <p>{{ food.food_name }}</p>
+                        <div class="row">
+                            <div class="col-6">
+                                <a href="{% url 'MomProfile' mom_id=food.mom_id %}">
+                                    <img style="display: inline;" class="mom-profile" src="{% url 'getMomImage' mom_id=food.mom_id %}"/>
+                                    <p style="display: inline">مامان {{ food.mom.user.first_name }}</p>
+                                </a>
+                            </div>
+                            <div class="col-6">
+                                <p>امتیاز</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-6">
-                        <p>{{ food.food_price }}</p>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-6">
-                        <a href="{% url 'MomProfile' mom_id=food.mom_id %}">
-                            <img style="display: inline;" class="mom-profile" src="{{ food.mom_id }}"/>
-                            <p style="display: inline">مامان {{ food.mom.first_name }}</p>
-                        </a>
-                    </div>
-                    <div class="col-6">
-                        <p>امتیاز</p>
-                    </div>
-                </div>
+                </a>
             </div>
         {% endfor %}
     </div>
+
+    <br/>
+
+    <div class="container2">
+        <div class="pagination text-center">
+            <span class="step-links">
+
+                {% if page_obj.has_previous %}
+
+                    <a href="?page=1"><img class="pagination-icon" src="{% static 'image/icons/left.png' %}"/></a>
+
+                    <a href="?page={{ page_obj.previous_page_number }}"><img class="pagination-icon"
+                                                                             src="{% static 'image/icons/back.png' %}"/></a>
+
+                {% endif %}
+
+                <span class="current">
+                    صفحه {{ page_obj.number }} از {{ page_obj.paginator.num_pages }}
+                </span>
+
+                {% if page_obj.has_next %}
+
+                    <a href="?page={{ page_obj.next_page_number }}"><img class="pagination-icon"
+                                                                         src="{% static 'image/icons/next.png' %}"></a>
+
+                    <a href="?page={{ page_obj.paginator.num_pages }}"><img class="pagination-icon"
+                                                                            src="{% static 'image/icons/right.png' %}"></a>
+
+                {% endif %}
+
+            </span>
+        </div>
+    </div>
+
 {% endblock %}
