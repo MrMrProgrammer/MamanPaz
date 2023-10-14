@@ -1,0 +1,29 @@
+{% extends 'base/layout.html' %}
+
+{% block HeaderLinks %}
+{% endblock %}
+
+
+{% block main %}
+    <div class="row text-center">
+        <div class="col-12">
+            <h1 style="padding: 20px; background-color: #ffd900; border-radius: 10px;">به زرین پال خوش آمدید</h1>
+        </div>
+    </div>
+
+    <div class="row text-center">
+        <div class="col-12">
+            <h4 style="padding: 20px; background-color: #ffd900; border-radius: 10px;">مبلغ قابل پرداخت : {{ sumCart }}
+                تومان</h4>
+        </div>
+    </div>
+
+    <br/>
+
+    <div class="row text-center">
+        <div class="col-12">
+            <a href="{% url 'pay_cart' %}" class="btn btn-success">پرداخت شد (الکی مثلا)</a>
+        </div>
+    </div>
+
+{% endblock %}

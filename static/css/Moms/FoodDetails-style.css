@@ -1,12 +1,14 @@
 #food-photo {
     border-radius: 10px;
     border: 1px solid #6b6b6b;
+    box-shadow: 2px 2px 5px gray;
 }
 
 .food-detail {
     border: 1px solid black;
     border-radius: 10px;
     padding: 10px;
+    box-shadow: 2px 2px 5px gray;
 }
 .dastor-pokht {
     text-align: center;

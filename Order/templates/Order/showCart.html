@@ -7,85 +7,100 @@
 
 {% block main %}
 
-        {% if order_details %}
+    {% if order_details %}
 
-            <div class="main-box">
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th>نام غذا</th>
-                                <th>مامان</th>
-                                <th>قیمت واحد</th>
-                                <th>تعداد</th>
-                                <th>قیمت کل</th>
-                                <th>وضعیت پرداخت</th>
+        <div class="main-box">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>نام غذا</th>
+                        <th>مامان</th>
+                        <th>قیمت واحد</th>
+                        <th>تعداد</th>
+                        <th>قیمت کل</th>
+                        <th>وضعیت پرداخت</th>
 
-                            </tr>
-                        </thead>
+                    </tr>
+                    </thead>
 
-                        {% for order in order_details %}
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <a class="remove-icon" href="{% url 'removePerOrder' orderDetailId=order.id %}">
-                                            ❌
-                                        </a>
-                                    </td>
-                                    <td>{{ order.food.food_name }}</td>
-                                    <td>مامان {{ order.food.mom.user.first_name }}</td>
-                                    <td>{{ order.food.food_price }}</td>
-                                    <td>{{ order.count }}</td>
-                                    <td>{% widthratio order.food.food_price 1 order.count %}</td>
-                                    {% if order.is_paid %}
-                                        <td>
-                                            <p class="btn btn-success">پرداخت شده</p>
-                                        </td>
-                                    {% else %}
-                                        <td>
-                                            <p class="btn btn-danger">پرداخت نشده</p>
-                                        </td>
-                                    {% endif %}
-                                </tr>
-                            </tbody>
-                        {% endfor %}
-                    </table>
-                </div>
+                    {% for order in order_details %}
+                        <tbody>
+                        <tr>
+                            {% if order.is_paid %}
+                                <td></td>
+                            {% else %}
+                                <td>
+                                    <a class="remove-icon" href="{% url 'removePerOrder' orderDetailId=order.id %}">
+                                        ❌
+                                    </a>
+                                </td>
+                            {% endif %}
+                            <td>{{ order.food.food_name }}</td>
+                            <td>مامان {{ order.food.mom.user.first_name }}</td>
+                            <td>{{ order.food.food_price }}</td>
+                            <td>{{ order.count }}</td>
+                            <td>{% widthratio order.food.food_price 1 order.count %}</td>
+                            {% if order.is_paid %}
+                                <td>
+                                    <p class="btn btn-success">پرداخت شده</p>
+                                </td>
+                            {% else %}
+                                <td>
+                                    <p class="btn btn-danger">پرداخت نشده</p>
+                                </td>
+                            {% endif %}
+                        </tr>
+                        </tbody>
+                    {% endfor %}
+                </table>
             </div>
+        </div>
 
-            <br/>
+        <br/>
 
-            <div class="main-box text-center">
-                <h2>اطلاعات خریدار</h2>
-                <br>
-
-                <p>نام : {{ request.user.first_name }}</p>
-                <p>نام خانوادگی : {{ request.user.last_name }}</p>
-                <p>تلفن همراه : {{ request.user.phone_number }}</p>
-                <p>آدرس : {{ request.user.address }}</p>
-
-                <p class="text-danger">توجه : درستی اطلاعات وارد شده بر عهده کاربر می باشد !</p>
-
-                <a href="{% url 'UpdateUserProfile' %}">
-                    <p class="btn btn-primary">ویرایش پروفایل کاربر</p>
-                </a>
-
-            </div>
-
+        <div class="main-box text-center">
+            <h2>اطلاعات خریدار</h2>
             <br>
 
-            <div class="text-center">
-                <p class="text-center btn btn-success">مجموع سبد خرید شما : {{ sumCart }} تومان</p>
-                <a href="">
-                    <P class="text-center btn btn-primary">پرداخت</P>
-                </a>
-            </div>
+            <p>نام : {{ request.user.first_name }}</p>
 
-        {% else %}
+            <p>نام خانوادگی : {{ request.user.last_name }}</p>
 
-            <h1 class="text-center "> سبد خرید شما خالی است </h1>
+            {% if request.user.phone_number == None %}
+                <p class="text-danger">تلفن همراه : {{ request.user.phone_number }}</p>
+            {% else %}
+                <p>تلفن همراه : {{ request.user.phone_number }}</p>
+            {% endif %}
 
-        {% endif %}
+            {% if request.user.address == '' %}
+                <p class="text-danger">آدرس : {{ request.user.address }}</p>
+            {% else %}
+                <p>آدرس : {{ request.user.address }}</p>
+            {% endif %}
+
+            <p class="text-danger">توجه : درستی اطلاعات وارد شده بر عهده کاربر می باشد !</p>
+
+            <a href="{% url 'UpdateUserProfile' %}">
+                <p class="btn btn-primary">ویرایش پروفایل کاربر</p>
+            </a>
+
+        </div>
+
+        <br>
+
+        <div class="text-center">
+            <p class="text-center btn btn-success">مجموع سبد خرید شما : {{ sumCart }} تومان</p>
+            <a href="{% url 'zarinPal' %}">
+                <P class="text-center btn btn-primary">پرداخت</P>
+            </a>
+        </div>
+
+    {% else %}
+
+        <h1 class="text-center "> سبد خرید شما خالی است </h1>
+
+    {% endif %}
 
 {% endblock %}

@@ -28,18 +28,22 @@
                 <a href="{% url 'MomProfile' mom_id=food.mom_id %}">
                     <img style="display: inline;" class="mom-profile" src="{% url 'getMomImage' mom_id=food.mom_id %}"/>
                     {% for mom in moms %}
-
                         {% if mom.user.id == food.mom_id %}
-
                             <p style="display: inline">مامان {{ mom.user.first_name }}</p>
-
                         {% endif %}
-
                     {% endfor %}
                 </a>
             </div>
             <div class="col-6">امتیاز غذا</div>
         </div>
+
+        {% if food.food_order != 0 %}
+            <div class="row text-center">
+                <div class="col-12">
+                    <p>{{ food.food_name }} دستپخت {{ food.mom.user.first_name }} تاکنون <strong>{{ food.food_order }}</strong>+ بار سفارش داده شده است.</p>
+                </div>
+            </div>
+        {% endif %}
 
         <hr/>
 

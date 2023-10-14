@@ -16,7 +16,7 @@ def add_to_order(request: HttpRequest):
         if food is not None:
             current_order: Order = Order.objects.get_or_create(is_paid=False, user_id=request.user.id)
             current_order = current_order[0]
-            current_order_detail = current_order.orderdetail_set.filter(food_id=food_id).first()
+            current_order_detail = current_order.orderdetail_set.filter(food_id=food_id, is_paid=False).first()
             if current_order_detail is not None:
                 current_order_detail.count += int(count)
                 current_order_detail.save()
@@ -55,8 +55,9 @@ def ShowCart(request: HttpRequest):
     sumCart = 0
 
     for i in order_details:
-        item = i.count * i.food.food_price
-        sumCart += item
+        if not i.is_paid:
+            item = i.count * i.food.food_price
+            sumCart += item
 
     context = {
         'order_details': order_details,
@@ -74,6 +75,7 @@ def removePerOrder(request: HttpRequest, orderDetailId):
 
 
 def showMomOrders(request: HttpRequest):
+
     user_id = request.user.id
 
     is_mom = User.objects.filter(id=request.user.id, is_mom=True)
@@ -90,3 +92,36 @@ def showMomOrders(request: HttpRequest):
         return render(request, 'Order/showMomOrders.html', context)
     else:
         return HttpResponseNotFound()
+
+
+def zarinPal(request):
+    order_id = Order.objects.filter(user_id=request.user.id, is_paid=False).first()
+    order_details = OrderDetail.objects.filter(order_id=order_id)
+
+    sumCart = 0
+
+    for i in order_details:
+        if not i.is_paid:
+            item = i.count * i.food.food_price
+            sumCart += item
+
+    context = {
+        'sumCart': sumCart,
+    }
+
+    return render(request, 'Order/zarinPal.html', context)
+
+
+def pay_cart(request):
+
+    order_id = Order.objects.filter(user_id=request.user.id, is_paid=False).first()
+    order_details = OrderDetail.objects.filter(order_id=order_id)
+
+    for i in order_details:
+        if not i.is_paid:
+            i.is_paid = True
+            i.food.food_order += i.count
+            i.save()
+            i.food.save()
+
+    return redirect('Show-Cart')

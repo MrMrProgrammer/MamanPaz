@@ -1,0 +1,41 @@
+#addNewFood {
+    border: 2px solid rgba(12, 99, 228, 0.69);
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px slategray;
+    color: rgba(12, 99, 228, 0.96);
+
+}
+
+#addNewFood h4 {
+    margin: 0;
+    padding: 10px;
+}
+
+.food-box {
+    border: 2px solid rgba(128, 128, 128, 0.96);
+    border-radius: 5px;
+    padding: 10px ;
+    box-shadow: 2px 2px 10px rgba(70, 70, 70, 0.65);
+}
+
+.food-box-link {
+    display: contents;
+}
+
+.food-img {
+    width: 85%;
+}
+
+.food-recipe {
+    padding: 5px;
+    /*border: 1px solid black;*/
+}
+
+.food-recipe p {
+    text-align: right;
+    width: 100%;
+}
+
+.btn {
+    width: 95px;
+}

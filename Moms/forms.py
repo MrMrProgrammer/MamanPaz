@@ -1,6 +1,7 @@
 from django import forms
 from BaseApp.models import User
 from .models import MomsModel
+from Moms.models import RawMaterial
 
 
 class MomRegisterForm(forms.Form):
@@ -119,3 +120,51 @@ class UpdateAdditionalMomProfileForm(forms.ModelForm):
             'city': 'شهر',
         }
 
+
+class AddFoodForm(forms.Form):
+    food_name = forms.CharField(
+        label='نام غذا',
+        widget=forms.TextInput(attrs=
+        {
+            'class': 'form-control',
+            'placeholder': 'نام غذا'
+        }),
+    )
+
+    food_price = forms.IntegerField(
+        label='قیمت غذا',
+        widget=forms.NumberInput(attrs=
+        {
+            'class': 'form-control',
+            'placeholder': 'قیمت غذا'
+        }),
+    )
+
+    food_recipe = forms.CharField(
+        label='دستور پخت',
+        widget=forms.TextInput(attrs=
+        {
+            'class': 'form-control',
+            'placeholder': 'دستور پخت'
+        }),
+    )
+
+    food_photo = forms.ImageField(
+        label='عکس غذا',
+        widget=forms.ClearableFileInput(attrs=
+        {
+            'class': 'form-control',
+            'placeholder': 'عکس غذا'
+        }),
+    )
+
+    raw_material = forms.ModelChoiceField(
+        queryset=RawMaterial.objects.all(), empty_label=None,
+
+        label='مواد اولیه',
+        widget=forms.SelectMultiple(attrs=
+        {
+            'class': 'form-control',
+            'placeholder': 'مواد اولیه',
+        }),
+    )

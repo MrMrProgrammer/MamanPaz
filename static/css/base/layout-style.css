@@ -61,6 +61,7 @@ header {
 /* Optional: Change the color of links on hover */
 .navbar-nav .nav-link:hover {
     color: #ff5851;
+    /*color: black;*/
 }
 
 .log-butt {
@@ -93,7 +94,9 @@ header {
 }
 
 #log-bt:hover {
-    color: #ff8d89;
+    /*color: #ff8d89;*/
+    color: black;
+
 }
 
 

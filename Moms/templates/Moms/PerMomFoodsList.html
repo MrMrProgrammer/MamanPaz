@@ -1,0 +1,88 @@
+{% extends 'base/layout.html' %}
+{% load static %}
+
+{% block HeaderLinks %}
+    <link rel="stylesheet" href="{% static 'css/Moms/PerMomFoodsList-style.css' %}">
+{% endblock %}
+
+{% block main %}
+
+    <div class="row text-center">
+        <div class="col-2"></div>
+        <div class="col-8">
+            <a href="{% url 'addFood' %}">
+                <div id="addNewFood">
+                    <h4>+ اضافه کردن غذای جدید</h4>
+                </div>
+            </a>
+        </div>
+        <div class="col-2"></div>
+    </div>
+
+    <br/>
+
+    {% for food in foodsList %}
+        <div class="row">
+            <div class="col-12">
+                <a class="food-box-link" href="">
+                    <div class="food-box">
+                        <div class="row text-center">
+                            <div class="col-4">
+                                <img class="food-img" src="{{ food.food_photo.url }}"/>
+                            </div>
+
+                            <div class="col-8">
+
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h3>{{ food.food_name }}</h3>
+                                    </div>
+                                </div>
+
+                                <hr/>
+
+                                <div class="row justify-content-center">
+
+                                    <div class="col-3">
+                                        <p>قیمت : {{ food.food_price }} تومان</p>
+                                    </div>
+
+                                    <div class="col-3">
+                                        <p>تعداد سفارش : {{ food.food_order }}</p>
+                                    </div>
+
+                                    <div class="col-2">
+                                        <p class="btn btn-success">فعال</p>
+                                    </div>
+
+                                    <div class="col-2">
+                                        <a class="btn btn-primary">ویرایش</a>
+                                    </div>
+
+                                    <div class="col-2">
+                                        <a class="btn btn-danger">حذف</a>
+                                    </div>
+
+                                </div>
+
+                                <hr>
+
+                                <div class="row" style="height: 50%">
+
+                                    <div class="col-12">
+                                        <div class="food-recipe">
+                                            <p> دستور پخت : {{ food.food_recipe }}</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    {% endfor %}
+
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'base/layout.html' %}
+
+{% block HeaderLinks %}
+{% endblock %}
+
+
+{% block main %}
+
+    <div class="row text-center">
+        <div class="col-3"></div>
+        <div class="col-6">
+
+            <h1>اضافه کردن غذا</h1>
+
+            <br/>
+
+            <form action="{% url 'addFood' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                {{ add_food_form.food_name }}
+                {{ add_food_form.food_name.errors }}
+
+                <br/>
+                <br/>
+
+                {{ add_food_form.food_price }}
+                {{ add_food_form.food_price.errors }}
+
+                <br/>
+                <br/>
+
+                {{ add_food_form.food_recipe }}
+                {{ add_food_form.food_recipe.errors }}
+
+                <br/>
+                <br/>
+
+                {{ add_food_form.food_photo }}
+                {{ add_food_form.food_photo.errors }}
+
+                <br/>
+                <br/>
+
+{#                {{ add_food_form.raw_material }}#}
+{#                {{ add_food_form.raw_material.errors }}#}
+
+{#                <br/>#}
+{#                <br/>#}
+
+
+                <button class="btn btn-primary" id="register-butt" type="submit">اضافه کردن غذا</button>
+            </form>
+        </div>
+        <div class="col-3"></div>
+
+    </div>
+{% endblock %}
+
