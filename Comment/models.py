@@ -32,3 +32,14 @@ class Comment(models.Model):
 
     class Meta:
         db_table = 'Comment'
+
+
+class Answer(models.Model):
+    answer_text = models.CharField(max_length=200)
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.answer_text
+
+    class Meta:
+        db_table = 'Answer'

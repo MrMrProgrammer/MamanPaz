@@ -105,7 +105,6 @@
 
                 <div class="row text-center">
                     <div class="col-12">
-
                         <form method="post" action="{% url 'FoodDetails' food_id=food.id %}">
                             {% csrf_token %}
 
@@ -125,7 +124,6 @@
                             {{ add_comment_form.text }}
 
                             <br/>
-
 
                             <button type="submit" class="btn btn-primary">ثبت نظر</button>
 
@@ -147,9 +145,10 @@
                     </div>
                 </div>
 
-                <hr/>
-
                 {% for comment in comments %}
+
+                    <hr/>
+
                     <div class="row">
                         <div class="col-12">
                             <div class="row">
@@ -182,14 +181,24 @@
                                 </div>
                             </div>
 
-                            <hr>
+                            {% if comment.is_answered %}
+                                yes
+                            {% else %}
+                                no
+                            {% endif %}
+                            <form>
+                                <div class="row text-center">
 
+                                    <div class="col-9">
+                                            {{ add_answer_form.text }}
+                                    </div>
 
-                            <div class="row">
-                                <div class="col-12">
-                                    <p>answer</p>
+                                    <div class="col-3">
+                                        <button class="btn btn-primary" type="submit">پاسخ</button>
+                                    </div>
+
                                 </div>
-                            </div>
+                            </form>
 
                         </div>
 

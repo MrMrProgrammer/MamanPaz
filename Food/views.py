@@ -6,7 +6,7 @@ from django.http import HttpRequest, HttpResponse, HttpResponseNotFound
 from .models import MomsModel, FoodsModel
 from Comment.models import Comment
 from Order.models import Order, OrderDetail
-from Comment.forms import CommentForm
+from Comment.forms import CommentForm, AnswerForm
 
 
 class FoodListView(ListView):
@@ -21,6 +21,7 @@ class FoodDetailsView(View):
     def get(self, request, food_id):
 
         add_comment_form = CommentForm()
+        add_answer_form = AnswerForm()
 
         food: FoodsModel = FoodsModel.objects.filter(id=food_id).first()
         other_food = FoodsModel.objects.filter(mom_id=food.mom_id).order_by('-id')
@@ -40,6 +41,7 @@ class FoodDetailsView(View):
             'comments': comments,
             'user_can_comment': user_can_comment,
             'add_comment_form': add_comment_form,
+            'add_answer_form': add_answer_form,
         }
 
         return render(request, 'Food/FoodDetails.html', context)
