@@ -4,7 +4,7 @@ from django.views.generic import ListView
 from .forms import AddFoodForm, UpdateFoodForm
 from django.http import HttpRequest, HttpResponse, HttpResponseNotFound
 from .models import MomsModel, FoodsModel
-from Comment.models import Comment
+from Comment.models import Comment, Answer
 from Order.models import Order, OrderDetail
 from Comment.forms import CommentForm, AnswerForm
 
@@ -49,6 +49,7 @@ class FoodDetailsView(View):
     def post(self, request, food_id):
 
         add_comment_form = CommentForm(request.POST)
+        add_answer_form = AnswerForm(request.POST)
 
         if add_comment_form.is_valid():
             text = add_comment_form.cleaned_data.get('text')
@@ -62,6 +63,21 @@ class FoodDetailsView(View):
             )
 
             new_comment.save()
+
+            return redirect('FoodDetails', food_id=food_id)
+
+
+        if add_answer_form.is_valid():
+            answer_text = add_answer_form.cleaned_data.get('text')
+            comment_id = pass
+            # add comment id !!!
+
+            new_answer = Answer(
+                answer_text=answer_text,
+                comment_id=comment_id
+            )
+
+            new_answer.save()
 
             return redirect('FoodDetails', food_id=food_id)
 
