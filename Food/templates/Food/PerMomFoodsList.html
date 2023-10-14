@@ -20,6 +20,7 @@
     </div>
 
     <br/>
+    <br/>
 
     {% for food in foodsList %}
         <div class="row">
@@ -41,7 +42,7 @@
 
                                 <hr/>
 
-                                <div class="row justify-content-center">
+                                <div class="row d-flex align-items-center">
 
                                     <div class="col-3">
                                         <p>قیمت : {{ food.food_price }} تومان</p>
@@ -52,15 +53,19 @@
                                     </div>
 
                                     <div class="col-2">
-                                        <p class="btn btn-success">فعال</p>
+                                        {% if food.is_active %}
+                                            <a href="" class="btn btn-success">فعال</a>
+                                        {% else %}
+                                            <a href="" class="btn btn-danger">غیرفعال</a>
+                                        {% endif %}
                                     </div>
 
                                     <div class="col-2">
-                                        <a class="btn btn-primary">ویرایش</a>
+                                        <a href="{% url 'UpdateFood' food_id=food.id %}" class="btn btn-primary">ویرایش</a>
                                     </div>
 
                                     <div class="col-2">
-                                        <a class="btn btn-danger">حذف</a>
+                                        <a href="{% url 'RemoveFood' food_id=food.id %}" class="btn btn-danger">حذف</a>
                                     </div>
 
                                 </div>
@@ -83,6 +88,8 @@
                 </a>
             </div>
         </div>
+
+        <br/>
     {% endfor %}
 
 {% endblock %}

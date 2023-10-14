@@ -17,33 +17,6 @@ class City(models.Model):
         return self.city
 
 
-class UnitRawMaterials(models.Model):
-    unit = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.unit
-
-    class Meta:
-        db_table = 'UnitRawMaterials'
-        verbose_name = 'UnitRawMaterial'
-        verbose_name_plural = 'UnitRawMaterials'
-
-
-class RawMaterial(models.Model):
-    name = models.CharField(max_length=100)
-    unit_raw_material = models.ForeignKey(UnitRawMaterials, on_delete=models.CASCADE)
-    icon = models.ImageField(upload_to='RawMaterial')
-
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        db_table = 'RawMaterial'
-        verbose_name = 'RawMaterial'
-        verbose_name_plural = 'RawMaterials'
-
-
 class MomsModel(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     profile_photo = models.ImageField(upload_to='moms_profiles', blank=True, null=True)
@@ -58,24 +31,3 @@ class MomsModel(models.Model):
         db_table = 'Moms'
         verbose_name = 'Mom'
         verbose_name_plural = 'Moms'
-
-
-class FoodsModel(models.Model):
-    mom = models.ForeignKey(MomsModel, on_delete=models.CASCADE)
-    food_name = models.CharField(max_length=100)
-    food_price = models.IntegerField()
-    food_recipe = models.CharField(max_length=500)
-    food_order = models.IntegerField(editable=False, default=0)
-    raw_material = models.ManyToManyField(RawMaterial)
-    # amount_raw_materials = models.IntegerField()
-    food_photo = models.ImageField(upload_to='foods_picture')
-    is_active = models.BooleanField(default=True)
-
-    def __str__(self):
-        return self.food_name
-
-    class Meta:
-        db_table = 'Foods'
-        verbose_name = 'Food'
-        verbose_name_plural = 'Foods'
-

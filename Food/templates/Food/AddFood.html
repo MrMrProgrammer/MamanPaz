@@ -41,11 +41,12 @@
                 <br/>
                 <br/>
 
-{#                {{ add_food_form.raw_material }}#}
-{#                {{ add_food_form.raw_material.errors }}#}
+                {{ add_food_form.is_active }}
+                {{ add_food_form.is_active.label }}
+                {{ add_food_form.is_active.errors }}
 
-{#                <br/>#}
-{#                <br/>#}
+                <br/>
+                <br/>
 
 
                 <button class="btn btn-primary" id="register-butt" type="submit">اضافه کردن غذا</button>

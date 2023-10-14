@@ -10,7 +10,11 @@
     <div class="row mom-profile-box text-center">
         <div class="col-12">
 
-            <img id="mom-image"  src="{{ mom.profile_photo.url }}">
+            {% if mom.profile_photo %}
+                <img id="mom-image"  src="{{ mom.profile_photo.url }}">
+            {% else %}
+                <img id="mom-image"  src="{% static 'image/icons/default_mom_profile.png' %}">
+            {% endif %}
 
             <br/>
             <br/>
@@ -27,41 +31,45 @@
 
     </div>
 
-    {% for food in foods %}
+    <br/>
 
-        <br>
+    <div class="row">
+        {% for food in foods %}
 
+            <div class="col-4 food-box text-center">
+                <a href="{% url 'FoodDetails' food_id=food.id %}">
+                    <div class="inner-box">
+                        <div class="row">
+                            <div class="col-12">
+                                <img class="food-img" src="{{ food.food_photo.url }}">
+                            </div>
+                        </div>
 
-        <div class="col-12 foods text-center">
-            <div class="row">
-                <div class="col-12">
-                    <img class="food-img" src="{{ food.food_photo.url }}">
-                </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <p>{{ food.food_name }}</p>
+                            </div>
+                            <div class="col-6">
+                                <p>{{ food.food_price }}</p>
+                            </div>
+                        </div>
 
-                <div class="row">
-                    <div class="col-6">
-                        <p>{{ food.food_name }}</p>
+                        <div class="row">
+                            <div class="col-6">
+                                <a href="{% url 'MomProfile' mom_id=food.mom.user_id %}">
+                                    <img style="display: inline;" class="mom-profile" src="{% url 'getMomImage' mom_id=food.mom_id %}"/>
+                                    <p style="display: inline">مامان {{ food.mom.user.first_name }}</p>
+                                </a>
+                            </div>
+                            <div class="col-6">
+                                <p>امتیاز</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-6">
-                        <p>{{ food.food_price }}</p>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-6">
-                        <a href="{% url 'MomProfile' mom_id=mom.user.id %}">
-                            <img style="display: inline;" class="mom-profile" src="{{ mom.profile_photo.url }}"/>
-                            <p style="display: inline;">مامان {{ food.mom.first_name }}</p>
-                        </a>
-                    </div>
-                    <div class="col-6">
-                        <p>امتیاز</p>
-                    </div>
-                </div>
-
+                </a>
             </div>
-        </div>
 
-    {% endfor %}
+        {% endfor %}
+    </div>
 
 {% endblock %}

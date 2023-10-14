@@ -1,7 +1,7 @@
 from django.core.validators import MinValueValidator
 from django.db import models
 from BaseApp.models import User
-from Moms.models import FoodsModel
+from Food.models import FoodsModel
 from Moms.models import MomsModel
 
 

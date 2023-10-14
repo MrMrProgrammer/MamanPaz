@@ -13,9 +13,11 @@
         <h1>همکارت رو به یه ناهار خونگی مهمون کن.</h1>
     </div>
 
+    <br/>
+
     <div class="row">
         {% for food in foods %}
-            <div class="col-4 food-box text-center">
+            <div class="col-md-4 food-box text-center">
                 <a href="{% url 'FoodDetails' food_id=food.id %}">
                     <div class="inner-box">
                         <div class="row">
@@ -35,7 +37,7 @@
 
                         <div class="row">
                             <div class="col-6">
-                                <a href="{% url 'MomProfile' mom_id=food.mom_id %}">
+                                <a href="{% url 'MomProfile' mom_id=food.mom.user_id %}">
                                     <img style="display: inline;" class="mom-profile" src="{% url 'getMomImage' mom_id=food.mom_id %}"/>
                                     <p style="display: inline">مامان {{ food.mom.user.first_name }}</p>
                                 </a>

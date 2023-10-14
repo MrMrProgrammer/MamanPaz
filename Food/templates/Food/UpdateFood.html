@@ -1,0 +1,70 @@
+{% extends 'base/layout.html' %}
+{% load static %}
+
+{% block HeaderLinks %}
+{% endblock %}
+
+{% block main %}
+
+    <div class="row">
+        <div class="col-3"></div>
+
+        <div class="col-6">
+            <div style="text-align: center">
+
+                <h1>ویرایش غذا</h1>
+
+                <img style="width: 50%;" src="{{ food_photo }}">
+
+                <br/>
+                <br/>
+
+                <form action="{% url 'UpdateFood' food_id=food_id %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+
+                    {{ edit_form.food_photo }}
+                    {{ edit_form.food_photo.errors }}
+
+                    <br/>
+                    <br/>
+
+                    {{ edit_form.food_name }}
+                    {{ edit_form.food_name.errors }}
+
+                    <br/>
+                    <br/>
+
+
+                    {{ edit_form.food_price }}
+                    {{ edit_form.food_price.errors }}
+
+                    <br/>
+                    <br/>
+
+                    {{ edit_form.food_recipe }}
+                    {{ edit_form.food_recipe.errors }}
+
+                    <br/>
+                    <br/>
+
+
+                    {{ edit_form.is_active }}
+                    {{ edit_form.is_active.label }}
+                    {{ edit_form.is_active.errors }}
+
+                    <br/>
+                    <br/>
+
+
+                    <button class="btn btn-primary" id="register-butt" type="submit">ذخیره</button>
+
+                </form>
+
+            </div>
+        </div>
+
+        <div class="col-3"></div>
+    </div>
+
+{% endblock %}

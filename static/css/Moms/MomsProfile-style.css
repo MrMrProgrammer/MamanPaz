@@ -26,3 +26,55 @@
     border-radius: 50%;
     margin: 0 10px;
 }
+
+
+/*===================================*/
+
+.foods {
+    border: 1px solid #5e5e5e;
+    box-shadow: 2px 2px 2px black;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.food-img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;margin-bottom: 10px;
+}
+
+
+.food-box {
+    padding: 10px;
+}
+
+.inner-box {
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(133, 133, 133, 0.83);
+    background-color: rgba(225, 225, 225, 0.73);
+    box-shadow: 1px 1px 18px black;
+}
+
+.pagination {
+    direction: ltr;
+}
+
+.pagination-icon {
+    width: 30px;
+    height: 30px;
+}
+
+.container2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10vh; /* این برای مرکز چین کردن عمودی می‌باشد */
+}
+
+.mom-profile {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 0 10px;
+}

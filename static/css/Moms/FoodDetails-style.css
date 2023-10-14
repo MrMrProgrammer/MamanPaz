@@ -2,17 +2,18 @@
     border-radius: 10px;
     border: 1px solid #6b6b6b;
     box-shadow: 2px 2px 5px gray;
+    width: 100% ;
 }
 
 .food-detail {
-    border: 1px solid black;
-    border-radius: 10px;
+    border: 1px solid #989898;
+    border-radius: 5px;
     padding: 10px;
-    box-shadow: 2px 2px 5px gray;
+    box-shadow: 2px 2px 5px #bbbbbb;
 }
 .dastor-pokht {
     text-align: center;
-    font-size: 18px;
+    font-size: 24px;
 
 }
 
@@ -39,4 +40,17 @@
     height: 40px;
     border-radius: 50%;
     margin: 0 10px;
+}
+
+.otherFood {
+    border: 1px solid #bbbbbb;
+    box-shadow: 1px 1px 2px #7a7a7a;
+    padding: 10px;
+}
+
+
+.ux-icon {
+    width: 50px;
+    height: 50px;
+
 }

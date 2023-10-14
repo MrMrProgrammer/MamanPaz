@@ -2,7 +2,7 @@ from django.http import HttpRequest, HttpResponse, JsonResponse, HttpResponseNot
 from django.shortcuts import render, redirect
 from django.views.generic import ListView
 from .models import Order, OrderDetail
-from Moms.models import FoodsModel
+from Food.models import FoodsModel
 from BaseApp.models import User
 from Moms.models import MomsModel
 

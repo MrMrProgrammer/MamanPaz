@@ -1,12 +1,13 @@
-import random
 from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic import ListView
 from BaseApp.models import User
-from .forms import MomRegisterForm, UpdateMomProfileForm, UpdateAdditionalMomProfileForm, AddFoodForm
+from .forms import MomRegisterForm, UpdateMomProfileForm, UpdateAdditionalMomProfileForm
 from SendMail.sendMail import send_email
 from django.http import HttpRequest, HttpResponse
-from .models import MomsModel, FoodsModel
+from .models import MomsModel
+from Food.models import FoodsModel
+# import random
 
 
 class MomsRegisterView(View):
@@ -129,9 +130,9 @@ class MomsListView(ListView):
     paginate_by = 4
 
 
-def MomProfile(request, mom_id):
+def mom_profile(request, mom_id):
     mom = MomsModel.objects.get(user_id=mom_id)
-    foods = FoodsModel.objects.filter(mom_id=mom_id)
+    foods = FoodsModel.objects.filter(mom__user_id=mom_id)
 
     context = {
         'mom': mom,
@@ -141,103 +142,7 @@ def MomProfile(request, mom_id):
     return render(request, 'Moms/MomsProfile.html', context)
 
 
-class FoodListView(ListView):
-    model = FoodsModel
-    queryset = FoodsModel.objects.all()
-    template_name = 'Moms/MomsFoods.html'
-    context_object_name = 'foods'
-    paginate_by = 6
-
-    # def getMomProfile(self, mom_id):
-    #     mom = MomsModel.objects.filter(id=mom_id).first()
-    #     profile = mom.profile_photo.url
-    #     return HttpResponse(profile)
-
-
-def FoodDetails(request, food_id):
-    food: FoodsModel = FoodsModel.objects.filter(id=food_id).first()
-    moms: MomsModel = MomsModel.objects.all()
-
-    context = {
-        'food': food,
-        'moms': moms,
-    }
-
-    return render(request, 'Moms/FoodDetails.html', context)
-
-
-def getMomProfile(request, mom_id):
+def get_mom_profile(request, mom_id):
     mom = MomsModel.objects.filter(id=mom_id).first()
     profile = mom.profile_photo.url
     return redirect(profile)
-
-
-def PerMomFoodsList(request):
-    foodsList: FoodsModel = FoodsModel.objects.filter(mom__user_id=request.user.id)
-
-    context = {
-        "foodsList": foodsList,
-    }
-
-    return render(request, 'Moms/PerMomFoodsList.html', context)
-
-
-class addFoodView(View):
-    def get(self, request):
-        add_food_form = AddFoodForm()
-        context = {
-            'add_food_form': add_food_form,
-        }
-
-        return render(request, 'Moms/AddFood.html', context)
-
-    def post(self, request):
-        add_food_form = AddFoodForm(request.POST, request.FILES)
-
-        if add_food_form.is_valid():
-            food_name = add_food_form.cleaned_data.get('food_name')
-            food_price = add_food_form.cleaned_data.get('food_price')
-            food_recipe = add_food_form.cleaned_data.get('food_recipe')
-            food_photo = add_food_form.cleaned_data.get('food_photo')
-            # raw_material = add_food_form.cleaned_data.get('raw_material')
-
-            new_food = FoodsModel(
-                food_name=food_name,
-                food_price=food_price,
-                food_recipe=food_recipe,
-                food_photo=food_photo,
-                # raw_material=raw_material,
-            )
-
-            new_food.save()
-
-            # new_mom = User(is_mom=True,
-            #                email=mom_email,
-            #                first_name=first_name,
-            #                last_name=last_name,
-            #                phone_number=phone_number,
-            #                username=mom_email,
-            #                email_active_code=email_active_code,
-            #                address=address)
-            #
-            # new_mom.set_password(email_active_code)
-            #
-            # send_email("رمز عبور موقت", mom_email, {'email_active_code': email_active_code},
-            #            "SendMail/RegisterMail.html")
-            # new_mom.save()
-            #
-            # mom_id = new_mom.id
-            #
-            # new_mom_model = MomsModel(
-            #     user_id=mom_id
-            # )
-            #
-            # new_mom_model.save()
-
-            # return render(request, 'Moms/RegisterEmailSent.html')
-
-        context = {
-            'add_food_form': add_food_form,
-        }
-
-        return render(request, 'Moms/AddFood.html', context)
