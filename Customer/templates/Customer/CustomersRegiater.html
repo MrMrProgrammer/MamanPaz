@@ -10,41 +10,51 @@
 
         <br>
 
-        <form action="{% url 'CustomerRegisterView' %}" method="post" id="edit-form">
-            {% csrf_token %}
+        <div class="row">
 
-            {{ register_form.first_name }}
-            {{ register_form.first_name.errors }}
+            <div class="col-4"></div>
 
-            <br/>
-            <br/>
+            <div class="col-4">
+                <form action="{% url 'CustomerRegisterView' %}" method="post" id="edit-form">
+                    {% csrf_token %}
 
-            {{ register_form.last_name }}
-            {{ register_form.last_name.errors }}
+                    {{ register_form.first_name }}
+                    {{ register_form.first_name.errors }}
 
-            <br/>
-            <br/>
+                    <br/>
+                    <br/>
 
-            {{ register_form.phone_number }}
-            {{ register_form.phone_number.errors }}
+                    {{ register_form.last_name }}
+                    {{ register_form.last_name.errors }}
 
-            <br/>
-            <br/>
+                    <br/>
+                    <br/>
 
-            {{ register_form.email }}
-            {{ register_form.email.errors }}
+                    {{ register_form.phone_number }}
+                    {{ register_form.phone_number.errors }}
 
-            <br/>
-            <br/>
+                    <br/>
+                    <br/>
 
-            {{ register_form.address }}
-            {{ register_form.address.errors }}
+                    {{ register_form.email }}
+                    {{ register_form.email.errors }}
 
-            <br/>
-            <br/>
+                    <br/>
+                    <br/>
 
-            <button class="btn btn-primary" id="register-butt" type="submit">ثبت نام مشتری</button>
-        </form>
+                    {{ register_form.address }}
+                    {{ register_form.address.errors }}
+
+                    <br/>
+                    <br/>
+
+                    <button class="btn btn-primary" id="register-butt" type="submit">ثبت نام مشتری</button>
+                </form>
+            </div>
+
+            <div class="col-4"></div>
+
+        </div>
 
     </div>
 

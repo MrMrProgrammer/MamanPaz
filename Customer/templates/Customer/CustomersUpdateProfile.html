@@ -10,42 +10,52 @@
 
         <br>
 
-        <form action="{% url 'UpdateUserProfile' %}" method="post" id="edit-form">
-            {% csrf_token %}
+        <div class="row">
 
-            {{ edit_form.first_name }}
-            {{ edit_form.first_name.errors }}
+            <div class="col-md-4"></div>
 
-            <br/>
-            <br/>
+            <div class="col-md-4">
+                <form action="{% url 'UpdateUserProfile' %}" method="post" id="edit-form">
+                    {% csrf_token %}
 
-            {{ edit_form.last_name }}
-            {{ edit_form.last_name.errors }}
+                    {{ edit_form.first_name }}
+                    {{ edit_form.first_name.errors }}
 
-            <br/>
-            <br/>
+                    <br/>
+                    <br/>
 
-            {{ edit_form.email }}
-            {{ edit_form.email.errors }}
+                    {{ edit_form.last_name }}
+                    {{ edit_form.last_name.errors }}
 
-            <br/>
-            <br/>
+                    <br/>
+                    <br/>
 
-            {{ edit_form.phone_number }}
-            {{ edit_form.phone_number.errors }}
+                    {{ edit_form.email }}
+                    {{ edit_form.email.errors }}
 
-            <br/>
-            <br/>
+                    <br/>
+                    <br/>
 
-            {{ edit_form.address }}
-            {{ edit_form.address.errors }}
+                    {{ edit_form.phone_number }}
+                    {{ edit_form.phone_number.errors }}
 
-            <br/>
-            <br/>
+                    <br/>
+                    <br/>
 
-            <button class="btn btn-primary" id="register-butt" type="submit">ذخیره اطلاعات مشتری</button>
+                    {{ edit_form.address }}
+                    {{ edit_form.address.errors }}
 
-        </form>
+                    <br/>
+                    <br/>
+
+                    <button class="btn btn-primary" id="register-butt" type="submit">ذخیره اطلاعات مشتری</button>
+
+                </form>
+            </div>
+
+            <div class="col-md-4"></div>
+
+        </div>
 
     </div>
 
