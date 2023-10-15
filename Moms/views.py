@@ -7,6 +7,8 @@ from SendMail.sendMail import send_email
 from django.http import HttpRequest, HttpResponse
 from .models import MomsModel
 from Food.models import FoodsModel
+
+
 # import random
 
 
@@ -146,3 +148,17 @@ def get_mom_profile(request, mom_id):
     mom = MomsModel.objects.filter(id=mom_id).first()
     profile = mom.profile_photo.url
     return redirect(profile)
+
+
+def show_mom_wallet(request):
+    mom: MomsModel = MomsModel.objects.filter(user_id=request.user.id).first()
+    wallet = mom.wallet
+
+    mom_name = mom.user.first_name
+
+    context = {
+        'wallet': wallet,
+        'mom_name': mom_name
+    }
+
+    return render(request, 'Moms/MomWallet.html', context)

@@ -75,7 +75,6 @@ def removePerOrder(request: HttpRequest, orderDetailId):
 
 
 def showMomOrders(request: HttpRequest):
-
     user_id = request.user.id
 
     is_mom = User.objects.filter(id=request.user.id, is_mom=True)
@@ -113,9 +112,16 @@ def zarinPal(request):
 
 
 def pay_cart(request):
-
     order_id = Order.objects.filter(user_id=request.user.id, is_paid=False).first()
-    order_details = OrderDetail.objects.filter(order_id=order_id)
+    order_details: OrderDetail = OrderDetail.objects.filter(order_id=order_id)
+
+    for item in order_details:
+        if not item.is_paid:
+            totall = item.food.food_price * item.count
+            mom: MomsModel = MomsModel.objects.filter(id=item.food.mom.id).first()
+            mom.wallet += totall
+            mom.save()
+            print(totall)
 
     for i in order_details:
         if not i.is_paid:

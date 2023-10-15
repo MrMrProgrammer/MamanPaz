@@ -92,9 +92,11 @@
 
         <div class="text-center">
             <p class="text-center btn btn-success">مجموع سبد خرید شما : {{ sumCart }} تومان</p>
-            <a href="{% url 'zarinPal' %}">
-                <P class="text-center btn btn-primary">پرداخت</P>
-            </a>
+            {% if sumCart != 0 %}
+                <a href="{% url 'zarinPal' %}">
+                    <P class="text-center btn btn-primary">پرداخت</P>
+                </a>
+            {% endif %}
         </div>
 
     {% else %}
