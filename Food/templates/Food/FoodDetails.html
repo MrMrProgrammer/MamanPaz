@@ -30,7 +30,8 @@
                 <div class="row text-center">
                     <div class="col-6">
                         <a href="{% url 'MomProfile' mom_id=food.mom.user_id %}">
-                            <img style="display: inline;" class="mom-profile" src="{% url 'getMomImage' mom_id=food.mom_id %}"/>
+                            <img style="display: inline;" class="mom-profile"
+                                 src="{% url 'getMomImage' mom_id=food.mom_id %}"/>
                             <p style="display: inline">مامان {{ food.mom.user.first_name }}</p>
                         </a>
                     </div>
@@ -95,43 +96,43 @@
 
                 <div class="food-detail">
 
-                <div class="row">
-                    <div class="col-12 text-center">
-                        <h5>ثبت نظر شما</h5>
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <h5>ثبت نظر شما</h5>
+                        </div>
                     </div>
-                </div>
 
-                <hr/>
+                    <hr/>
 
-                <div class="row text-center">
-                    <div class="col-12">
-                        <form method="post" action="{% url 'FoodDetails' food_id=food.id %}">
-                            {% csrf_token %}
+                    <div class="row text-center">
+                        <div class="col-12">
+                            <form method="post" action="{% url 'FoodDetails' food_id=food.id %}">
+                                {% csrf_token %}
 
-                            <div class="row text-right">
-                                <div class="col-3">
-                                    <p>میزان رضایت شما : </p>
+                                <div class="row text-right">
+                                    <div class="col-3">
+                                        <p>میزان رضایت شما : </p>
+                                    </div>
+
+                                    <div class="col-9">
+                                        {{ add_comment_form.user_experience }}
+                                        {{ add_comment_form.user_experience.errors }}
+                                    </div>
                                 </div>
 
-                                <div class="col-9">
-                                    {{ add_comment_form.user_experience }}
-                                    {{ add_comment_form.user_experience.errors }}
-                                </div>
-                            </div>
+                                <br/>
 
-                            <br/>
+                                {{ add_comment_form.text }}
 
-                            {{ add_comment_form.text }}
+                                <br/>
 
-                            <br/>
+                                <button type="submit" class="btn btn-primary">ثبت نظر</button>
 
-                            <button type="submit" class="btn btn-primary">ثبت نظر</button>
-
-                        </form>
+                            </form>
+                        </div>
                     </div>
-                </div>
 
-            </div>
+                </div>
 
             {% endif %}
 
@@ -182,32 +183,58 @@
                             </div>
 
                             {% if comment.is_answered %}
-                                yes
-                            {% else %}
-                                no
-                            {% endif %}
-                            <form>
                                 <div class="row text-center">
-
-                                    <div class="col-9">
-                                            {{ add_answer_form.text }}
+                                    <div class="col-10" style="text-align: -webkit-left;">
+                                        <div class="answer-box">
+                                            {% for answer in answers %}
+                                                {% if answer.comment_id == comment.id %}
+                                                    <p>{{ answer }}</p>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
                                     </div>
+                                    <div class="col-2">
 
-                                    <div class="col-3">
-                                        <button class="btn btn-primary" type="submit">پاسخ</button>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <img class="mom-profile" alt="profile"
+                                                     src="{{ food.mom.profile_photo.url }}"/>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <p>مامان {{ food.mom.user.first_name }}</p>
+                                            </div>
+                                        </div>
+
                                     </div>
 
                                 </div>
-                            </form>
+                            {% else %}
+                                {% if request.user.id == food.mom.user.id %}
+                                    <div class="row text-center">
 
+                                        <div class="col-9">
+                                            <input type="text" id="answer-text" class="{{ comment.id }} form-control"
+                                                   placeholder="متن پاسخ" required>
+                                        </div>
+                                        <div class="col-3">
+                                            <button id="{{ comment.id }}" onclick="addCommentAnswer({{ comment.id }})"
+                                                    class="btn btn-primary">پاسخ
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                {% endif %}
+                            {% endif %}
                         </div>
 
                     </div>
                 {% endfor %}
 
-
             </div>
-
+            <br/>
 
         </div>
 

@@ -54,3 +54,16 @@
     height: 50px;
 
 }
+
+.answer-box {
+    background-color: #eaeaea;
+    border: 1px solid #caced2;
+    padding: 5px;
+    border-radius: 5px;
+    width: fit-content;
+    text-align: -webkit-left;
+}
+
+.answer-box p {
+    margin: 0;
+}

@@ -26,6 +26,7 @@ class FoodDetailsView(View):
         food: FoodsModel = FoodsModel.objects.filter(id=food_id).first()
         other_food = FoodsModel.objects.filter(mom_id=food.mom_id).order_by('-id')
         comments = Comment.objects.filter(food_id=food_id).order_by('-id')
+        answers: Answer = Answer.objects.filter(comment__food_id=food_id)
 
         order_id = Order.objects.filter(user_id=request.user.id).first()
         user_orders = OrderDetail.objects.filter(food_id=food_id, is_paid=True)
@@ -42,6 +43,7 @@ class FoodDetailsView(View):
             'user_can_comment': user_can_comment,
             'add_comment_form': add_comment_form,
             'add_answer_form': add_answer_form,
+            'answers': answers,
         }
 
         return render(request, 'Food/FoodDetails.html', context)
@@ -66,10 +68,9 @@ class FoodDetailsView(View):
 
             return redirect('FoodDetails', food_id=food_id)
 
-
         if add_answer_form.is_valid():
             answer_text = add_answer_form.cleaned_data.get('text')
-            comment_id = pass
+            comment_id = 1
             # add comment id !!!
 
             new_answer = Answer(
@@ -79,7 +80,7 @@ class FoodDetailsView(View):
 
             new_answer.save()
 
-            return redirect('FoodDetails', food_id=food_id)
+        return redirect('FoodDetails', food_id=food_id)
 
 
 def PerMomFoodsList(request):
