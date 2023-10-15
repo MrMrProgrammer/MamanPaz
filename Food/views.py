@@ -21,29 +21,18 @@ class FoodDetailsView(View):
     def get(self, request, food_id):
 
         add_comment_form = CommentForm()
-        add_answer_form = AnswerForm()
 
         food: FoodsModel = FoodsModel.objects.filter(id=food_id).first()
         other_food = FoodsModel.objects.filter(mom_id=food.mom_id).order_by('-id')
         comments = Comment.objects.filter(food_id=food_id).order_by('-id')
         answers: Answer = Answer.objects.filter(comment__food_id=food_id)
 
-
-        user_can_comment = False
-
         order_id = Order.objects.filter(user_id=request.user.id).first()
-
         order_detail = OrderDetail.objects.filter(order_id=order_id, is_paid=True, food_id=food_id)
-
         if order_detail:
             user_can_comment = True
-
-        # user_orders = OrderDetail.objects.filter(food_id=food_id, is_paid=True)
-
-        # if user_orders:
-        #     user_can_comment = True
-        # else:
-        #     user_can_comment = False
+        else:
+            user_can_comment = False
 
         context = {
             'food': food,
@@ -51,7 +40,6 @@ class FoodDetailsView(View):
             'comments': comments,
             'user_can_comment': user_can_comment,
             'add_comment_form': add_comment_form,
-            'add_answer_form': add_answer_form,
             'answers': answers,
         }
 
@@ -60,7 +48,6 @@ class FoodDetailsView(View):
     def post(self, request, food_id):
 
         add_comment_form = CommentForm(request.POST)
-        add_answer_form = AnswerForm(request.POST)
 
         if add_comment_form.is_valid():
             text = add_comment_form.cleaned_data.get('text')
@@ -76,20 +63,6 @@ class FoodDetailsView(View):
             new_comment.save()
 
             return redirect('FoodDetails', food_id=food_id)
-
-        if add_answer_form.is_valid():
-            answer_text = add_answer_form.cleaned_data.get('text')
-            comment_id = 1
-            # add comment id !!!
-
-            new_answer = Answer(
-                answer_text=answer_text,
-                comment_id=comment_id
-            )
-
-            new_answer.save()
-
-        return redirect('FoodDetails', food_id=food_id)
 
 
 def PerMomFoodsList(request):

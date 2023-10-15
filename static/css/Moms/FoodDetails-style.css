@@ -1,12 +1,12 @@
 #food-photo {
     border-radius: 10px;
     border: 1px solid #6b6b6b;
-    box-shadow: 2px 2px 5px gray;
+    box-shadow: 2px 2px 5px #808080FF;
     width: 100% ;
 }
 
-.food-detail {
-    border: 1px solid #989898;
+.box {
+    border: 1px solid #dadada;
     border-radius: 5px;
     padding: 10px;
     box-shadow: 2px 2px 5px #bbbbbb;
@@ -14,13 +14,10 @@
 .dastor-pokht {
     text-align: center;
     font-size: 24px;
-
 }
 
 #counter{
     display: inline;
-    /*border: 1px solid #808080FF;*/
-    /*border-radius: 5px;*/
     padding: 10px;
     font-size: 30px;
     font-weight: bold;
