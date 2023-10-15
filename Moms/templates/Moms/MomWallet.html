@@ -1,4 +1,5 @@
 {% extends 'base/layout.html' %}
+{% load humanize %}
 
 {% block HeaderLinks %}
 {% endblock %}
@@ -11,6 +12,6 @@
 
     <br/>
 
-    <h2>موجودی کیف پول شما {{ wallet }} تومان می باشد</h2>
+    <h2>موجودی کیف پول شما {{ wallet|intcomma }} تومان می باشد</h2>
 
 {% endblock %}

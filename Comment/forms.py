@@ -17,13 +17,3 @@ class CommentForm(forms.Form):
             'rows': 3,
         }),
     )
-
-
-class AnswerForm(forms.Form):
-    text = forms.CharField(
-        label='پاسخ',
-        widget=forms.TextInput(attrs={
-            'class': 'form-control',
-            'placeholder': 'متن پاسخ',
-        }),
-    )

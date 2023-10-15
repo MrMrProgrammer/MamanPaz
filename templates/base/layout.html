@@ -41,7 +41,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">سرویس غذای شرکتی</a>
+                        <a class="nav-link" href="{% url 'CompanyRegister' %}">سرویس غذای شرکتی</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'MomsRegisterView' %}">آشپزی در مامان پز</a>
@@ -70,7 +70,7 @@
 
                         <li class="nav-item mom-order">
                             <a id="log-bt" class="nav-link mom-order" href="{% url 'show_mom_wallet' %}">
-                                <img src="{% static 'image/icons/wallet.svg' %}"/> کیف پول
+                                <img style="width: 25px;" src="{% static 'image/icons/wallet.png' %}"/> کیف پول
                             </a>
                         </li>
 

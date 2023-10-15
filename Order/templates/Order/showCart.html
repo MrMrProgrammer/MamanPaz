@@ -1,5 +1,6 @@
 {% extends 'base/layout.html' %}
 {% load static %}
+{% load humanize %}
 
 {% block HeaderLinks %}
     <link rel="stylesheet" href="{% static 'css/Order/showCart-style.css' %}">
@@ -39,9 +40,10 @@
                             {% endif %}
                             <td>{{ order.food.food_name }}</td>
                             <td>مامان {{ order.food.mom.user.first_name }}</td>
-                            <td>{{ order.food.food_price }}</td>
+                            <td>{{ order.food.food_price|intcomma }}</td>
                             <td>{{ order.count }}</td>
                             <td>{% widthratio order.food.food_price 1 order.count %}</td>
+
                             {% if order.is_paid %}
                                 <td>
                                     <p class="btn btn-success">پرداخت شده</p>
@@ -91,7 +93,7 @@
         <br>
 
         <div class="text-center">
-            <p class="text-center btn btn-success">مجموع سبد خرید شما : {{ sumCart }} تومان</p>
+            <p class="text-center btn btn-success">مجموع سبد خرید شما : {{ sumCart|intcomma }} تومان</p>
             {% if sumCart != 0 %}
                 <a href="{% url 'zarinPal' %}">
                     <P class="text-center btn btn-primary">پرداخت</P>

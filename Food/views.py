@@ -6,7 +6,7 @@ from django.http import HttpRequest, HttpResponse, HttpResponseNotFound
 from .models import MomsModel, FoodsModel
 from Comment.models import Comment, Answer
 from Order.models import Order, OrderDetail
-from Comment.forms import CommentForm, AnswerForm
+from Comment.forms import CommentForm
 
 
 class FoodListView(ListView):

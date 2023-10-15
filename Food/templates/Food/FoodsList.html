@@ -1,5 +1,6 @@
 {% extends 'base/layout.html' %}
 {% load static %}
+{% load humanize %}
 
 {% block HeaderLinks %}
     <link rel="stylesheet" href="{% static 'css/Moms/MomsFoods-style.css' %}"/>
@@ -31,7 +32,7 @@
                                 <p>{{ food.food_name }}</p>
                             </div>
                             <div class="col-6">
-                                <p>{{ food.food_price }}</p>
+                                <p>{{ food.food_price|intcomma }}</p>
                             </div>
                         </div>
 

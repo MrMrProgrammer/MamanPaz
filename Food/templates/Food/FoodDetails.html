@@ -1,5 +1,6 @@
 {% extends 'base/layout.html' %}
 {% load static %}
+{% load humanize %}
 
 {% block HeaderLinks %}
     <link rel="stylesheet" href="{% static 'css/Moms/FoodDetails-style.css' %}">
@@ -22,7 +23,7 @@
                     </div>
                     <div class="col-6">
                         <h3>
-                            {{ food.food_price }} تومان
+                            {{ food.food_price|intcomma }} تومان
                         </h3>
                     </div>
                 </div>
@@ -265,7 +266,7 @@
                                     <div class="col-6">
                                         <p style="margin: 0">{{ food.food_name }}</p>
                                     </div>
-                                    <div class="col-6">{{ food.food_price }} تومان</div>
+                                    <div class="col-6">{{ food.food_price|intcomma }} تومان</div>
                                 </div>
                             </a>
                         {% endfor %}

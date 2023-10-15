@@ -1,0 +1,88 @@
+{% extends 'base/layout.html' %}
+{% load static %}
+
+{% block HeaderLinks %}
+{% endblock %}
+
+{% block main %}
+
+    <div style="text-align: center">
+
+        <h1>ویرایش پروفایل مامان</h1>
+{##}
+        <br>
+
+        {% if current_user_pro.profile_photo %}
+            <img id="profile_mom_photo" src="{{ current_user_pro.profile_photo.url }}" />
+{#        {% else %}#}
+{#            <img id="profile_mom_photo" src="{% static 'image/icons/default_mom_profile.png' %}" />#}
+        {% endif %}
+
+        <br/>
+        <br/>
+
+        <form action="{% url 'UpdateMomProfile' %}" method="post" id="edit-form" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            {{ edit_form_pro.profile_photo }}
+            {{ edit_form_pro.profile_photo.errors }}
+
+            <br/>
+            <br/>
+
+            {{ edit_form.first_name }}
+            {{ edit_form.first_name.errors }}
+
+            <br/>
+            <br/>
+
+            {{ edit_form.last_name }}
+            {{ edit_form.last_name.errors }}
+
+            <br/>
+            <br/>
+
+            {{ edit_form.email }}
+            {{ edit_form.email.errors }}
+
+            <br/>
+            <br/>
+
+            {{ edit_form.phone_number }}
+            {{ edit_form.phone_number.errors }}
+
+            <br/>
+            <br/>
+
+            {{ edit_form_pro.home_number }}
+            {{ edit_form_pro.home_number.errors }}
+
+            <br/>
+            <br/>
+
+            {{ edit_form_pro.state }}
+            {{ edit_form_pro.state.errors }}
+
+            <br/>
+            <br/>
+
+            {{ edit_form_pro.city }}
+            {{ edit_form_pro.city.errors }}
+
+            <br/>
+            <br/>
+
+            {{ edit_form.address }}
+            {{ edit_form.address.errors }}
+
+            <br/>
+            <br/>
+
+            <button class="btn btn-primary" id="register-butt" type="submit">ذخیره</button>
+
+        </form>
+
+    </div>
+
+
+{% endblock %}

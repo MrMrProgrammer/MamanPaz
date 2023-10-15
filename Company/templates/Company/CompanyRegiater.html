@@ -1,0 +1,61 @@
+{% extends 'base/layout.html' %}
+
+{% block HeaderLinks %}
+{% endblock %}
+
+{% block main %}
+
+    <div style="text-align: center">
+        <h1>ثبت نام شرکت</h1>
+
+        <br>
+
+        <div class="row">
+            <div class="col-md-4"></div>
+
+            <div class="col-md-4">
+                <form action="{% url 'CompanyRegister' %}" method="post">
+                    {% csrf_token %}
+
+                    {{ register_form.name }}
+                    {{ register_form.name.errors }}
+
+                    <br/>
+                    <br/>
+
+                    {{ register_form.phone_number }}
+                    {{ register_form.phone_number.errors }}
+
+                    <br/>
+                    <br/>
+
+                    {{ register_form.number }}
+                    {{ register_form.number.errors }}
+
+                    <br/>
+                    <br/>
+
+                    {{ register_form.company_name }}
+                    {{ register_form.company_name.errors }}
+
+                    <br/>
+                    <br/>
+
+                    {{ register_form.numberـpersonnel }}
+                    {{ register_form.numberـpersonnel.errors }}
+
+                    <br/>
+                    <br/>
+
+                    <button class="btn btn-primary" id="register-butt" type="submit">ثبت نام مامان</button>
+                </form>
+            </div>
+
+            <div class="col-md-4"></div>
+
+        </div>
+
+    </div>
+
+
+{% endblock %}
