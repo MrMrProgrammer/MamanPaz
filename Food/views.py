@@ -28,13 +28,22 @@ class FoodDetailsView(View):
         comments = Comment.objects.filter(food_id=food_id).order_by('-id')
         answers: Answer = Answer.objects.filter(comment__food_id=food_id)
 
-        order_id = Order.objects.filter(user_id=request.user.id).first()
-        user_orders = OrderDetail.objects.filter(food_id=food_id, is_paid=True)
 
-        if user_orders:
+        user_can_comment = False
+
+        order_id = Order.objects.filter(user_id=request.user.id).first()
+
+        order_detail = OrderDetail.objects.filter(order_id=order_id, is_paid=True, food_id=food_id)
+
+        if order_detail:
             user_can_comment = True
-        else:
-            user_can_comment = False
+
+        # user_orders = OrderDetail.objects.filter(food_id=food_id, is_paid=True)
+
+        # if user_orders:
+        #     user_can_comment = True
+        # else:
+        #     user_can_comment = False
 
         context = {
             'food': food,
