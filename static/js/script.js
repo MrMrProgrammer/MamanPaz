@@ -32,7 +32,7 @@ function addFoodToOrder(food_id) {
             addBtn.style.display = "inline-block";
             successBtn.style.display = "none";
 
-        }, 1500);
+        }, 1000);
 
         console.log("ok");
     });
@@ -55,6 +55,14 @@ function addDate() {
     if (date != '') {
         $.get('/order/add-date?date=' + date).then(res => {
             console.log('ok');
+            document.getElementById('save-date-btn').style.display = "none";
+            document.getElementById('date').style.display = 'none';
+            document.getElementById('show-date').innerText = 'تاریخ ثبت شده : ' + date;
+            document.getElementById('show-date').style.display = 'block';
+
+            document.getElementById('payment-not-active').style.display = 'none';
+            document.getElementById('payment-active').style.display = 'inline-block';
+
         });
     }
 }

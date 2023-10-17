@@ -1,5 +1,6 @@
 {% extends 'base/layout.html' %}
 {% load static %}
+{% load humanize %}
 
 {% block HeaderLinks %}
     <link rel="stylesheet" href="{% static 'css/Order/order-info.css' %}">
@@ -19,17 +20,17 @@
                 <div class="row text-center">
                     <div class="col-md-4"></div>
                     <div class="col-md-2">تاریخ دریافت غذا :</div>
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                         <input class="form-control" type="date" id="date">
+                        <p id="show-date" style="display: none"></p>
                     </div>
 
-                    <div class="col-md-4"></div>
+                    <div class="col-md-3"></div>
                 </div>
 
                 <br/>
 
-                <button class="btn btn-success" onclick="addDate()">ثبت آدرس</button>
-
+                <button class="btn btn-success" onclick="addDate()" id="save-date-btn">ثبت تاریخ</button>
                 <br/>
 
             </div>
@@ -99,7 +100,7 @@
                 <p class="text-danger">توجه : درستی اطلاعات وارد شده بر عهده کاربر می باشد !</p>
 
                 <a href="{% url 'UpdateUserProfile' %}">
-                    <p class="btn btn-primary">ویرایش پروفایل کاربر</p>
+                    <p class="btn btn-outline-primary">ویرایش پروفایل کاربر</p>
                 </a>
 
             </div>
@@ -110,13 +111,25 @@
 
     <div class="row text-center">
         <div class="col-12">
+            <p class="btn btn-primary">مجموع مبلغ پرداختی : {{ sum|intcomma }} تومان </p>
+        </div>
+    </div>
+
+    <div class="row text-center">
+        <div class="col-12">
+
             <a href="{% url 'Show-Cart' %}">
                 <p class="btn btn-outline-danger">مرحله قبل</p>
             </a>
 
-            <a href="">
+            <a href="{% url 'zarinPal' %}" style="display: none;" id="payment-active">
                 <p class="btn btn-success">مرحله آخر (پرداخت)</p>
             </a>
+
+            <a id="payment-not-active">
+                <p class="btn btn-outline-secondary" >مرحله آخر (پرداخت)</p>
+            </a>
+
         </div>
     </div>
 

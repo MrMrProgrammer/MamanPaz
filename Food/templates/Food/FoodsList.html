@@ -29,10 +29,16 @@
 
                         <div class="row">
                             <div class="col-6">
-                                <p>{{ food.food_name }}</p>
+                                <p>{{ food.food_name }}{% if not food.is_active %}<span> (غیرفعال)</span>{% endif %}</p>
+
+
                             </div>
                             <div class="col-6">
+                            {% if food.is_active %}
                                 <p>{{ food.food_price|intcomma }}</p>
+                            {% else %}
+                                <span> - - - - - </span>
+                            {% endif %}
                             </div>
                         </div>
 

@@ -11,7 +11,7 @@ from Comment.forms import CommentForm
 
 class FoodListView(ListView):
     model = FoodsModel
-    queryset = FoodsModel.objects.all()
+    queryset = FoodsModel.objects.all().order_by('-id')
     template_name = 'Food/FoodsList.html'
     context_object_name = 'foods'
     paginate_by = 6

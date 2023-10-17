@@ -121,6 +121,7 @@ def zarinPal(request):
 
 
 def pay_cart(request):
+
     order_id = Order.objects.filter(user_id=request.user.id, is_paid=False).first()
     order_details: OrderDetail = OrderDetail.objects.filter(order_id=order_id)
 
@@ -143,16 +144,30 @@ def pay_cart(request):
 
 
 def order_info(request):
-    return render(request, 'Order/OrderInfo.html')
+    order_id = Order.objects.filter(user_id=request.user.id, is_paid=False).first()
+    no_paid_order_details = OrderDetail.objects.filter(order_id=order_id, is_paid=False)
+
+    sum = 0
+
+    for item in no_paid_order_details:
+        sum = item.food.food_price * item.count
+
+    context = {
+        'sum': sum
+    }
+
+    return render(request, 'Order/OrderInfo.html', context)
 
 
 def add_date(request):
     date = request.GET.get('date')
 
-    print(date)
-
     order_id = Order.objects.filter(user_id=request.user.id, is_paid=False).first()
     no_paid_order_details = OrderDetail.objects.filter(order_id=order_id, is_paid=False)
+
+    for order in no_paid_order_details:
+        order.date = date
+        order.save()
 
     return JsonResponse({
         'ok': 'ok'

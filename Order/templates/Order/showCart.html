@@ -22,6 +22,7 @@
                             <th>قیمت واحد</th>
                             <th>تعداد</th>
                             <th>قیمت کل</th>
+                            <th>تاریخ</th>
                             <th>وضعیت پرداخت</th>
 
                         </tr>
@@ -44,8 +45,16 @@
                                 </td>
                                 <td>مامان {{ order.food.mom.user.first_name }}</td>
                                 <td>{{ order.food.food_price|intcomma }}</td>
-                                <td>{{ order.count }}</td>
+                                <td>
+                                    {{ order.count }}
+{#                                    <input class="form-control" type="number" value="{{ order.count }}" min="0" id="">#}
+                                </td>
                                 <td>{% widthratio order.food.food_price 1 order.count %}</td>
+                                {% if order.date %}
+                                    <td>{{ order.date }}</td>
+                                {% else %}
+                                    <td class="text-danger">تنظیم نشده</td>
+                                {% endif %}
                                 <td>
                                     <p class="btn btn-danger">پرداخت نشده</p>
                                 </td>
@@ -55,7 +64,7 @@
                     </table>
                 </div>
 
-                <p class="btn btn-outline-success">مجموع سبد خرید شما : {{ sumCart }} تومان</p>
+                <p class="btn btn-outline-success">مجموع سبد خرید شما : {{ sumCart|intcomma }} تومان</p>
 
             </div>
         {% endif %}
@@ -74,6 +83,7 @@
                             <th>قیمت واحد</th>
                             <th>تعداد</th>
                             <th>قیمت کل</th>
+                            <th>تاریخ</th>
                             <th>وضعیت پرداخت</th>
 
                         </tr>
@@ -90,6 +100,7 @@
                                 <td>{{ order.food.food_price|intcomma }}</td>
                                 <td>{{ order.count }}</td>
                                 <td>{% widthratio order.food.food_price 1 order.count %}</td>
+                                <td>{{ order.date }}</td>
                                 <td>
                                     <p class="btn btn-success">پرداخت شده</p>
                                 </td>
@@ -103,20 +114,18 @@
 
         <br/>
 
-        <div class="text-center">
-            <a href="{% url 'order-info' %}">
-                <p class="btn btn-primary">مرحله بعد</p>
-            </a>
-
-
-        </div>
+        {% if no_paid_order_details %}
+            <div class="text-center">
+                <a href="{% url 'order-info' %}">
+                    <p class="btn btn-primary">مرحله بعد</p>
+                </a>
+            </div>
+        {% endif %}
 
     {% else %}
 
         <h1 class="text-center "> سبد خرید شما خالی است </h1>
 
     {% endif %}
-
-
 
 {% endblock %}

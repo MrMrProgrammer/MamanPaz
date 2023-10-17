@@ -15,6 +15,7 @@
                     <tr>
                         <th>نام غذا</th>
                         <th>تعداد</th>
+                        <th>تاریخ</th>
                         <th>سفارش دهنده</th>
                         <th>تلفن تماس</th>
                         <th>آدرس</th>
@@ -28,6 +29,7 @@
                         <tr>
                             <td>{{ order.food.food_name }}</td>
                             <td>{{ order.count }}</td>
+                            <td>{{ order.date }}</td>
                             <td>{{ order.order.user.get_full_name }}</td>
                             <td>{{ order.order.user.phone_number }}</td>
                             <td>{{ order.order.user.address }}</td>
