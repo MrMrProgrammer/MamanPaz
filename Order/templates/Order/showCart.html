@@ -8,97 +8,107 @@
 
 {% block main %}
 
-    {% if order_details %}
+    {% if is_blank %}
 
-        <div class="main-box">
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th></th>
-                        <th>نام غذا</th>
-                        <th>مامان</th>
-                        <th>قیمت واحد</th>
-                        <th>تعداد</th>
-                        <th>قیمت کل</th>
-                        <th>وضعیت پرداخت</th>
-
-                    </tr>
-                    </thead>
-
-                    {% for order in order_details %}
-                        <tbody>
+        {% if no_paid_order_details %}
+            <div class="main-box text-center">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
                         <tr>
-                            {% if order.is_paid %}
-                                <td></td>
-                            {% else %}
-                                <td>
-                                    <a class="remove-icon" href="{% url 'removePerOrder' orderDetailId=order.id %}">
-                                        ❌
-                                    </a>
-                                </td>
-                            {% endif %}
-                            <td>{{ order.food.food_name }}</td>
-                            <td>مامان {{ order.food.mom.user.first_name }}</td>
-                            <td>{{ order.food.food_price|intcomma }}</td>
-                            <td>{{ order.count }}</td>
-                            <td>{% widthratio order.food.food_price 1 order.count %}</td>
+                            <th></th>
+                            <th>نام غذا</th>
+                            <th>مامان</th>
+                            <th>قیمت واحد</th>
+                            <th>تعداد</th>
+                            <th>قیمت کل</th>
+                            <th>وضعیت پرداخت</th>
 
-                            {% if order.is_paid %}
+                        </tr>
+                        </thead>
+
+                        {% for order in no_paid_order_details %}
+                            <tbody>
+                            <tr>
+                                {% if order.is_paid %}
+                                    <td></td>
+                                {% else %}
+                                    <td>
+                                        <a class="remove-icon" href="{% url 'removePerOrder' orderDetailId=order.id %}">
+                                            ❌
+                                        </a>
+                                    </td>
+                                {% endif %}
                                 <td>
-                                    <p class="btn btn-success">پرداخت شده</p>
+                                    <a href="{% url 'FoodDetails' food_id=order.food.id %}">{{ order.food.food_name }}</a>
                                 </td>
-                            {% else %}
+                                <td>مامان {{ order.food.mom.user.first_name }}</td>
+                                <td>{{ order.food.food_price|intcomma }}</td>
+                                <td>{{ order.count }}</td>
+                                <td>{% widthratio order.food.food_price 1 order.count %}</td>
                                 <td>
                                     <p class="btn btn-danger">پرداخت نشده</p>
                                 </td>
-                            {% endif %}
-                        </tr>
-                        </tbody>
-                    {% endfor %}
-                </table>
+                            </tr>
+                            </tbody>
+                        {% endfor %}
+                    </table>
+                </div>
+
+                <p class="btn btn-outline-success">مجموع سبد خرید شما : {{ sumCart }} تومان</p>
+
             </div>
-        </div>
+        {% endif %}
 
         <br/>
 
-        <div class="main-box text-center">
-            <h2>اطلاعات خریدار</h2>
-            <br>
+        {% if paid_order_details %}
+            <div class="main-box">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th></th>
+                            <th>نام غذا</th>
+                            <th>مامان</th>
+                            <th>قیمت واحد</th>
+                            <th>تعداد</th>
+                            <th>قیمت کل</th>
+                            <th>وضعیت پرداخت</th>
 
-            <p>نام : {{ request.user.first_name }}</p>
+                        </tr>
+                        </thead>
 
-            <p>نام خانوادگی : {{ request.user.last_name }}</p>
+                        {% for order in paid_order_details %}
+                            <tbody>
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <a href="{% url 'FoodDetails' food_id=order.food.id %}">{{ order.food.food_name }}</a>
+                                </td>
+                                <td>مامان {{ order.food.mom.user.first_name }}</td>
+                                <td>{{ order.food.food_price|intcomma }}</td>
+                                <td>{{ order.count }}</td>
+                                <td>{% widthratio order.food.food_price 1 order.count %}</td>
+                                <td>
+                                    <p class="btn btn-success">پرداخت شده</p>
+                                </td>
+                            </tr>
+                            </tbody>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        {% endif %}
 
-            {% if request.user.phone_number == None %}
-                <p class="text-danger">تلفن همراه : {{ request.user.phone_number }}</p>
-            {% else %}
-                <p>تلفن همراه : {{ request.user.phone_number }}</p>
-            {% endif %}
-
-            {% if request.user.address == '' %}
-                <p class="text-danger">آدرس : {{ request.user.address }}</p>
-            {% else %}
-                <p>آدرس : {{ request.user.address }}</p>
-            {% endif %}
-
-            <p class="text-danger">توجه : درستی اطلاعات وارد شده بر عهده کاربر می باشد !</p>
-
-            <a href="{% url 'UpdateUserProfile' %}">
-                <p class="btn btn-primary">ویرایش پروفایل کاربر</p>
-            </a>
-
-        </div>
-
-        <br>
+        <br/>
 
         <div class="text-center">
-            <p class="text-center btn btn-success">مجموع سبد خرید شما : {{ sumCart|intcomma }} تومان</p>
-            {% if sumCart != 0 %}
-                <a href="{% url 'zarinPal' %}">
-                    <P class="text-center btn btn-primary">پرداخت</P>
-                </a>
-            {% endif %}
+            <a href="{% url 'order-info' %}">
+                <p class="btn btn-primary">مرحله بعد</p>
+            </a>
+
+
         </div>
 
     {% else %}
@@ -106,5 +116,7 @@
         <h1 class="text-center "> سبد خرید شما خالی است </h1>
 
     {% endif %}
+
+
 
 {% endblock %}

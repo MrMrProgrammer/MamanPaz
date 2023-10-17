@@ -22,6 +22,7 @@ class OrderDetail(models.Model):
     food = models.ForeignKey(FoodsModel, on_delete=models.CASCADE)
     final_price = models.IntegerField(null=True, blank=True)
     count = models.IntegerField()
+    date = models.DateField(blank=True, null=True)
     is_paid = models.BooleanField(default=False)
 
     def __str__(self):

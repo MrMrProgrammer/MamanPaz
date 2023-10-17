@@ -1,6 +1,7 @@
 from django.http import HttpRequest, HttpResponse, JsonResponse, HttpResponseNotFound
 from django.shortcuts import render, redirect
-from django.views.generic import ListView
+from django.views import View
+
 from .models import Order, OrderDetail
 from Food.models import FoodsModel
 from BaseApp.models import User
@@ -50,18 +51,26 @@ def CalculateOrder(request: HttpRequest):
 
 def ShowCart(request: HttpRequest):
     order_id = Order.objects.filter(user_id=request.user.id, is_paid=False).first()
-    order_details = OrderDetail.objects.filter(order_id=order_id)
+    no_paid_order_details = OrderDetail.objects.filter(order_id=order_id, is_paid=False)
+    paid_order_details = OrderDetail.objects.filter(order_id=order_id, is_paid=True)
+
+    is_blank = True
+
+    if not no_paid_order_details and not paid_order_details:
+        is_blank = False
 
     sumCart = 0
 
-    for i in order_details:
+    for i in no_paid_order_details:
         if not i.is_paid:
             item = i.count * i.food.food_price
             sumCart += item
 
     context = {
-        'order_details': order_details,
+        'no_paid_order_details': no_paid_order_details,
+        'paid_order_details': paid_order_details,
         'sumCart': sumCart,
+        'is_blank': is_blank,
     }
 
     return render(request, 'Order/showCart.html', context)
@@ -131,3 +140,20 @@ def pay_cart(request):
             i.food.save()
 
     return redirect('Show-Cart')
+
+
+def order_info(request):
+    return render(request, 'Order/OrderInfo.html')
+
+
+def add_date(request):
+    date = request.GET.get('date')
+
+    print(date)
+
+    order_id = Order.objects.filter(user_id=request.user.id, is_paid=False).first()
+    no_paid_order_details = OrderDetail.objects.filter(order_id=order_id, is_paid=False)
+
+    return JsonResponse({
+        'ok': 'ok'
+    })

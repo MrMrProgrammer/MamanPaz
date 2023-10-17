@@ -47,3 +47,14 @@ function addCommentAnswer(comment_id) {
         location.reload();
     });
 }
+
+function addDate() {
+
+    var date = document.getElementById("date").value;
+
+    if (date != '') {
+        $.get('/order/add-date?date=' + date).then(res => {
+            console.log('ok');
+        });
+    }
+}

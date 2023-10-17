@@ -1,0 +1,130 @@
+{% extends 'base/layout.html' %}
+{% load static %}
+
+{% block HeaderLinks %}
+    <link rel="stylesheet" href="{% static 'css/Order/order-info.css' %}">
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+{% endblock %}
+
+{% block main %}
+
+    <div class="row">
+        <div class="col-12">
+            <div class="main-box text-center">
+                <h2>جزئیات سفارش</h2>
+
+                <br>
+
+                <div class="row text-center">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-2">تاریخ دریافت غذا :</div>
+                    <div class="col-md-2">
+                        <input class="form-control" type="date" id="date">
+                    </div>
+
+                    <div class="col-md-4"></div>
+                </div>
+
+                <br/>
+
+                <button class="btn btn-success" onclick="addDate()">ثبت آدرس</button>
+
+                <br/>
+
+            </div>
+        </div>
+    </div>
+
+    <br/>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="main-box text-center">
+                <h2>نحوه ارسال غذا</h2>
+
+                <br>
+
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                        <form>
+                            <input required type="radio" value="اسنپ"/>
+                            <label>اسنپ</label>
+                            <br/>
+                            <input required type="radio"/>
+                            <label>تپسی</label>
+                            <br/>
+                            <input required type="radio"/>
+                            <label>پیک شخصی</label>
+                        </form>
+                    </div>
+                    <div class="col-md-3"></div>
+                </div>
+
+                <br/>
+
+                <div class="row">
+                    <div class="col-12">هزینه ارسال غذا : 60.000 تومان</div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <br/>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="main-box text-center">
+                <h2>اطلاعات خریدار</h2>
+                <br>
+
+                <p>نام : {{ request.user.first_name }}</p>
+
+                <p>نام خانوادگی : {{ request.user.last_name }}</p>
+
+                {% if request.user.phone_number == None %}
+                    <p class="text-danger">تلفن همراه : {{ request.user.phone_number }}</p>
+                {% else %}
+                    <p>تلفن همراه : {{ request.user.phone_number }}</p>
+                {% endif %}
+
+                {% if request.user.address == '' %}
+                    <p class="text-danger">آدرس : {{ request.user.address }}</p>
+                {% else %}
+                    <p>آدرس : {{ request.user.address }}</p>
+                {% endif %}
+
+                <p class="text-danger">توجه : درستی اطلاعات وارد شده بر عهده کاربر می باشد !</p>
+
+                <a href="{% url 'UpdateUserProfile' %}">
+                    <p class="btn btn-primary">ویرایش پروفایل کاربر</p>
+                </a>
+
+            </div>
+        </div>
+    </div>
+
+    <br/>
+
+    <div class="row text-center">
+        <div class="col-12">
+            <a href="{% url 'Show-Cart' %}">
+                <p class="btn btn-outline-danger">مرحله قبل</p>
+            </a>
+
+            <a href="">
+                <p class="btn btn-success">مرحله آخر (پرداخت)</p>
+            </a>
+        </div>
+    </div>
+
+    {#    <p class="text-center btn btn-success">مجموع سبد خرید شما : {{ sumCart|intcomma }} تومان</p>#}
+    {#    {% if sumCart != 0 %}#}
+    {#        <a href="{% url 'zarinPal' %}">#}
+    {#            <P class="text-center btn btn-primary">پرداخت</P>#}
+    {#        </a>#}
+    {#    {% endif %}#}
+
+{% endblock %}
