@@ -1,9 +1,11 @@
 from django.db import models
+from BaseApp.models import User
 
 
 # Create your models here.
 
 class CompanyModel(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     company_name = models.CharField(max_length=100)
     company_number = models.CharField(max_length=20)
     employee_count = models.IntegerField()

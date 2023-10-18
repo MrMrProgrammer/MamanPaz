@@ -1,0 +1,88 @@
+{% extends 'base/layout.html' %}
+{% load static %}
+
+{% block HeaderLinks %}
+{% endblock %}
+
+{% block main %}
+
+    <div style="text-align: center">
+
+        <h1>ویرایش پروفایل شرکت</h1>
+
+        <br>
+
+        <div class="row">
+            <div class="col-4"></div>
+
+            <div class="col-4">
+                <form action="{% url 'UpdateCompanyProfile' %}" method="post" id="edit-form" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    {{ edit_form_pro.company_name }}
+                    {{ edit_form_pro.company_name.errors }}
+
+                    <br/>
+                    <br/>
+
+                    {{ edit_form.first_name }}
+                    {{ edit_form.first_name.errors }}
+
+                    <br/>
+                    <br/>
+
+                    {{ edit_form.last_name }}
+                    {{ edit_form.last_name.errors }}
+
+                    <br/>
+                    <br/>
+
+                    {{ edit_form.email }}
+                    {{ edit_form.email.errors }}
+
+                    <br/>
+                    <br/>
+
+                    {{ edit_form.phone_number }}
+                    {{ edit_form.phone_number.errors }}
+
+                    <br/>
+                    <br/>
+
+                    {{ edit_form_pro.company_number }}
+                    {{ edit_form_pro.company_number.errors }}
+
+                    <br/>
+                    <br/>
+
+                    {{ edit_form_pro.employee_count }}
+                    {{ edit_form_pro.employee_count.errors }}
+
+                    <br/>
+                    <br/>
+
+                    {#            {{ edit_form_pro.city }}#}
+                    {#            {{ edit_form_pro.city.errors }}#}
+                    {##}
+                    {#            <br/>#}
+                    {#            <br/>#}
+                    {##}
+                    {#            {{ edit_form.address }}#}
+                    {#            {{ edit_form.address.errors }}#}
+                    {##}
+                    {#            <br/>#}
+                    {#            <br/>#}
+
+                    <button class="btn btn-primary" id="register-butt" type="submit">ذخیره</button>
+
+                </form>
+            </div>
+
+            <div class="col-4"></div>
+
+        </div>
+
+    </div>
+
+
+{% endblock %}

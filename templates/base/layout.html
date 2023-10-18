@@ -59,6 +59,7 @@
                 <ul id="left-but" class="navbar-nav">
 
                     {% if  request.user.is_mom %}
+
                         <li class="nav-item mom-order">
                             <a id="log-bt" class="nav-link mom-order" href="{% url 'showMomOrders' %}">سفارش ها</a>
                         </li>
@@ -81,25 +82,41 @@
                     </li>
 
                     {% if request.user.is_authenticated %}
+
                         <li class="nav-item log-butt">
                             <a id="log-bt" class="nav-link" href="{% url 'Show-Cart' %}">
                                 <i class="fas fa-shopping-cart"></i> سبد خرید
                             </a>
                         </li>
 
-
-                        {% if not request.user.is_mom %}
-                            <li class="nav-item log-butt">
-                                <a id="log-bt" class="nav-link" href="{% url 'UpdateUserProfile' %}">ویرایش پروفایل
-                                    کاربر</a>
-                            </li>
-                        {% endif %}
-
                         {% if  request.user.is_mom %}
                             <li class="nav-item log-butt">
                                 <a id="log-bt" class="nav-link" href="{% url 'UpdateMomProfile' %}">ویرایش پروفایل
                                     مامان</a>
                             </li>
+
+                        {% elif request.user.is_company %}
+                            <li class="nav-item log-butt">
+                                <a id="log-bt" class="nav-link" href="{% url 'UpdateCompanyProfile' %}">ویرایش پروفایل
+                                    شرکت</a>
+                            </li>
+
+                            <li class="nav-item log-butt">
+                                <a id="log-bt" class="nav-link" href="{% url 'EmployeeRegister' %}">کارمندان</a>
+                            </li>
+
+                        {% else %}
+
+                            <li class="nav-item log-butt">
+                                <a id="log-bt" class="nav-link" href="{% url 'UpdateUserProfile' %}">ویرایش پروفایل
+                                    کاربر</a>
+                            </li>
+
+                        {% endif %}
+
+
+                        {% if  request.user.is_company %}
+
                         {% endif %}
 
                         <li class="nav-item log-butt">

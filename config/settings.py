@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'Order',
     'Comment',
     'Company',
+    'Employee',
 
     'django.contrib.humanize',
 ]

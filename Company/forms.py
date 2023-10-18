@@ -1,4 +1,6 @@
 from django import forms
+from BaseApp.models import User
+from .models import CompanyModel
 
 
 class CompanyRegisterForm(forms.Form):
@@ -68,3 +70,73 @@ class CompanyRegisterForm(forms.Form):
             'placeholder': 'آدرس'
         }),
     )
+
+
+class UpdateCompanyProfileForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'email', 'phone_number', 'address']
+        widgets = {
+            'first_name': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'نام'
+            }),
+
+            'last_name': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'نام خانوادگی'
+            }),
+
+            'email': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'ایمیل'
+            }),
+
+            'phone_number': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'تلفن همراه'
+            }),
+
+            'address': forms.Textarea(attrs={
+                'class': 'form-control',
+                'placeholder': 'آدرس'
+            }),
+        }
+
+        labels = {
+            'first_name': 'نام',
+            'last_name': 'نام خانوادگی',
+            'email': 'ایمیل',
+            'phone_number': 'شماره تلفن',
+            'address': 'آدرس'
+        }
+
+
+class UpdateAdditionalCompanyProfileForm(forms.ModelForm):
+    class Meta:
+        model = CompanyModel
+        fields = ['company_name', 'company_number', 'employee_count']
+
+        widgets = {
+            'company_name': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'نام شرکت',
+            }),
+
+            'company_number': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'تلفن شرکت'
+            }),
+
+            'employee_count': forms.NumberInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'تعداد پرسنل'
+            }),
+
+        }
+
+        labels = {
+            'employee_name': 'نام شرکت',
+            'employee_number': 'تلفن شرکت',
+            'employee_count': 'تعداد پرسنل',
+        }

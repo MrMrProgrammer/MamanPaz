@@ -1,0 +1,60 @@
+{% extends 'base/layout.html' %}
+
+{% block HeaderLinks %}
+{% endblock %}
+
+{% block main %}
+
+    <br/>
+    <br/>
+
+
+    <div style="text-align: center">
+        <h1>ثبت نام کارمندان</h1>
+
+        <br>
+
+        <div class="row">
+
+            <div class="col-4"></div>
+
+            <div class="col-4">
+                <form action="{% url 'EmployeeRegister' %}" method="post" id="edit-form">
+                    {% csrf_token %}
+
+                    {{ register_form.first_name }}
+                    {{ register_form.first_name.errors }}
+
+                    <br/>
+                    <br/>
+
+                    {{ register_form.last_name }}
+                    {{ register_form.last_name.errors }}
+
+                    <br/>
+                    <br/>
+
+                    {{ register_form.phone_number }}
+                    {{ register_form.phone_number.errors }}
+
+                    <br/>
+                    <br/>
+
+                    {{ register_form.email }}
+                    {{ register_form.email.errors }}
+
+                    <br/>
+                    <br/>
+
+                    <button class="btn btn-primary" id="register-butt" type="submit">ثبت نام کارمند</button>
+                </form>
+            </div>
+
+            <div class="col-4"></div>
+
+        </div>
+
+    </div>
+
+
+{% endblock %}
