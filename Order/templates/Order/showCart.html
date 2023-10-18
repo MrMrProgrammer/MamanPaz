@@ -97,9 +97,9 @@
                                     <a href="{% url 'FoodDetails' food_id=order.food.id %}">{{ order.food.food_name }}</a>
                                 </td>
                                 <td>مامان {{ order.food.mom.user.first_name }}</td>
-                                <td>{{ order.food.food_price|intcomma }}</td>
+                                <td>{{ order.final_price|intcomma }}</td>
                                 <td>{{ order.count }}</td>
-                                <td>{% widthratio order.food.food_price 1 order.count %}</td>
+                                <td>{% widthratio order.final_price 1 order.count %}</td>
                                 <td>{{ order.date }}</td>
                                 <td>
                                     <p class="btn btn-success">پرداخت شده</p>

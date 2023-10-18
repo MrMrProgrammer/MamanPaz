@@ -52,6 +52,8 @@ function addDate() {
 
     var date = document.getElementById("date").value;
 
+    console.log(date);
+
     if (date != '') {
         $.get('/order/add-date?date=' + date).then(res => {
             console.log('ok');

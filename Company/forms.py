@@ -2,13 +2,21 @@ from django import forms
 
 
 class CompanyRegisterForm(forms.Form):
-
-    name = forms.CharField(
+    first_name = forms.CharField(
         label='نام',
         widget=forms.TextInput(attrs=
         {
             'class': 'form-control',
             'placeholder': 'نام'
+        }),
+    )
+
+    last_name = forms.CharField(
+        label='نام خانوادگی',
+        widget=forms.TextInput(attrs=
+        {
+            'class': 'form-control',
+            'placeholder': 'نام خانوادگی'
         }),
     )
 
@@ -20,11 +28,19 @@ class CompanyRegisterForm(forms.Form):
         }),
     )
 
+    email = forms.EmailField(
+        label='پست الکترونیک',
+        widget=forms.EmailInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'ایمیل'
+        }),
+    )
+
     number = forms.CharField(
-        label='تلفن',
+        label='تلفن شرکت',
         widget=forms.TextInput(attrs={
             'class': 'form-control',
-            'placeholder': 'تلفن'
+            'placeholder': 'تلفن شرکت'
         }),
     )
 
@@ -40,6 +56,15 @@ class CompanyRegisterForm(forms.Form):
         label='تعداد پرسنل',
         widget=forms.NumberInput(attrs={
             'class': 'form-control',
-            'placeholder': 'تعداد پرسنل'
+            'placeholder': 'تعداد پرسنل',
+            'min': 1
+        }),
+    )
+
+    address = forms.CharField(
+        label='آدرس',
+        widget=forms.Textarea(attrs={
+            'class': 'form-control',
+            'placeholder': 'آدرس'
         }),
     )

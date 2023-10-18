@@ -121,9 +121,13 @@ def zarinPal(request):
 
 
 def pay_cart(request):
-
     order_id = Order.objects.filter(user_id=request.user.id, is_paid=False).first()
     order_details: OrderDetail = OrderDetail.objects.filter(order_id=order_id)
+
+    for item in order_details:
+        final_price = item.food.food_price
+        item.final_price = final_price
+        item.save()
 
     for item in order_details:
         if not item.is_paid:

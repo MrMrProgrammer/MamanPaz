@@ -10,9 +10,15 @@ class User(AbstractUser):
     address = models.TextField(null=True, blank=True)
     is_mom = models.BooleanField(default=False)
     is_company = models.BooleanField(default=False)
+    is_employee = models.BooleanField(default=False)
+
 
     def __str__(self):
         return self.first_name + " " + self.last_name
 
     class Meta:
         db_table = 'User'
+
+
+class SiteSetting(models.Model):
+    pass

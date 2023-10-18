@@ -6,6 +6,12 @@
     <link rel="stylesheet" href="{% static 'css/Order/order-info.css' %}">
     <script src="{% static 'js/jquery.js' %}"></script>
     <script src="{% static 'js/script.js' %}"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+
 {% endblock %}
 
 {% block main %}
@@ -19,13 +25,12 @@
 
                 <div class="row text-center">
                     <div class="col-md-4"></div>
-                    <div class="col-md-2">تاریخ دریافت غذا :</div>
-                    <div class="col-md-3">
-                        <input class="form-control" type="date" id="date">
+{#                    <div class="col-md-2">تاریخ دریافت غذا :</div>#}
+                    <div class="col-md-4">
+                        <input class="form-control" type="text" id="date" placeholder="تاریخ دریافت غذا" autocomplete="off">
                         <p id="show-date" style="display: none"></p>
                     </div>
-
-                    <div class="col-md-3"></div>
+                    <div class="col-md-4"></div>
                 </div>
 
                 <br/>
@@ -139,5 +144,19 @@
     {#            <P class="text-center btn btn-primary">پرداخت</P>#}
     {#        </a>#}
     {#    {% endif %}#}
+
+    <script>
+        $(function() {
+            var today = new Date();
+            var maxDate = new Date();
+            maxDate.setDate(today.getDate() + 14);
+
+            $("#date").datepicker({
+                minDate: 0,
+                maxDate: maxDate,
+                dateFormat: "yy-mm-dd"
+            });
+        });
+    </script>
 
 {% endblock %}
