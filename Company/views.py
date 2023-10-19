@@ -4,7 +4,7 @@ from django.views import View
 from .forms import CompanyRegisterForm
 from BaseApp.models import User
 from SendMail.sendMail import send_email
-from .models import CompanyModel
+from .models import CompanyModel, CompanySchedule
 from .forms import UpdateCompanyProfileForm, UpdateAdditionalCompanyProfileForm
 
 
@@ -126,3 +126,25 @@ class CompanyUpdateProfileView(View):
         }
 
         return render(request, 'Company/CompanyUpdateProfile.html', context)
+
+
+def add_to_schedule(request: HttpRequest):
+    date = request.GET.get('date')
+    user_id = request.GET.get('user_id')
+    food_id = request.GET.get('food_id')
+
+    company = CompanyModel.objects.filter(user_id=user_id).first()
+
+    print(date)
+    print(user_id)
+    print(food_id)
+
+    new_schedule: CompanySchedule = CompanySchedule(
+        company_id=company.id,
+        food_id=food_id,
+        date=date,
+    )
+
+    new_schedule.save()
+
+    return HttpResponse('ok !')

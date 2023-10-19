@@ -48,8 +48,8 @@ class EmployeeRegisterView(View):
                                 last_name=last_name,
                                 phone_number=phone_number,
                                 username=employee_email,
-                                email_active_code=email_active_code
-                                )
+                                email_active_code=email_active_code,
+                                is_employee=True)
 
                 new_user.set_password(email_active_code)
 

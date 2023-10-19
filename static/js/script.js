@@ -67,3 +67,19 @@ function addDate() {
         });
     }
 }
+
+function addToSchedule(user_id, food_id) {
+    var date = document.getElementById("date").value;
+
+    if (date != '') {
+        console.log(date);
+        console.log(user_id);
+        console.log(food_id);
+
+        $.get('/company/AddToSchedule?date=' + date + '&user_id=' + user_id + '&food_id=' + food_id).then(res => {
+            console.log('ok');
+        });
+
+    }
+
+}
