@@ -147,4 +147,4 @@ def add_to_schedule(request: HttpRequest):
 
     new_schedule.save()
 
-    return HttpResponse('ok !')
+    return HttpResponse('added !')
