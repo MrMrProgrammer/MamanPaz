@@ -38,7 +38,6 @@ function addFoodToOrder(food_id) {
     });
 }
 
-
 function addCommentAnswer(comment_id) {
 
     var answer_text = document.getElementById("answer-text").value;

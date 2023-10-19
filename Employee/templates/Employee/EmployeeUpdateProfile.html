@@ -1,0 +1,63 @@
+{% extends 'base/layout.html' %}
+
+{% block HeaderLinks %}
+{% endblock %}
+
+{% block main %}
+
+    <div style="text-align: center">
+        <h1>ویرایش پروفایل کارمند</h1>
+
+        <br>
+
+        <div class="row">
+
+            <div class="col-md-4"></div>
+
+            <div class="col-md-4">
+                <form action="{% url 'UpdateEmployeeProfile' user_id=user_id %}" method="post">
+                    {% csrf_token %}
+
+                    {{ edit_form.first_name }}
+                    {{ edit_form.first_name.errors }}
+
+                    <br/>
+                    <br/>
+
+                    {{ edit_form.last_name }}
+                    {{ edit_form.last_name.errors }}
+
+                    <br/>
+                    <br/>
+
+                    {{ edit_form.email }}
+                    {{ edit_form.email.errors }}
+
+                    <br/>
+                    <br/>
+
+                    {{ edit_form.phone_number }}
+                    {{ edit_form.phone_number.errors }}
+
+                    <br/>
+                    <br/>
+
+                    {{ edit_form.address }}
+                    {{ edit_form.address.errors }}
+
+                    <br/>
+                    <br/>
+
+                    <button class="btn btn-primary" id="register-butt" type="submit">ذخیره اطلاعات مشتری</button>
+
+                </form>
+            </div>
+
+            <div class="col-md-4"></div>
+
+        </div>
+
+    </div>
+
+
+{% endblock %}

@@ -1,4 +1,5 @@
 from django import forms
+from BaseApp.models import User
 
 
 class EmployeeRegisterForm(forms.Form):
@@ -34,3 +35,35 @@ class EmployeeRegisterForm(forms.Form):
             'placeholder': 'ایمیل'
         }),
     )
+
+
+class UpdateEmployeeProfileForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'email', 'phone_number']
+
+        widgets = {
+            'first_name': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'نام'
+            }),
+            'last_name': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'نام خانوادگی'
+            }),
+            'email': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'ایمیل'
+            }),
+            'phone_number': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'تلفن همراه'
+            }),
+        }
+
+        labels = {
+            'first_name': 'نام',
+            'last_name': 'نام خانوادگی',
+            'email': 'ایمیل',
+            'phone_number': 'شماره تلفن',
+        }

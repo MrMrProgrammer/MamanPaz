@@ -1,7 +1,7 @@
-from django.http import HttpRequest
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
 from django.views import View
-from .forms import EmployeeRegisterForm
+from .forms import EmployeeRegisterForm, UpdateEmployeeProfileForm
 from BaseApp.models import User
 from Employee.models import EmployeeModel
 from Company.models import CompanyModel
@@ -69,7 +69,7 @@ class EmployeeRegisterView(View):
                     'user_name': first_name
                 }
 
-                return redirect('home')
+                return redirect('EmployeeList')
 
                 # return render(request, 'Employee/EmployeeRegiater.html', context)
 
@@ -80,12 +80,60 @@ class EmployeeRegisterView(View):
         return render(request, 'Employee/EmployeeRegiater.html', context)
 
 
-def PerCompanyEmployeesList(request):
-
-    employees: EmployeeModel = EmployeeModel.objects.filter(company_id = request.user.id).order_by('-id')
+def per_company_employees_list(request):
+    company = CompanyModel.objects.filter(user_id=request.user.id).first()
+    employees = EmployeeModel.objects.filter(company_id=company.id).order_by('-id')
 
     context = {
         "employees": employees,
     }
 
     return render(request, 'Employee/EmployeesList.html', context)
+
+
+class UpdateEmployeeProfileView(View):
+
+    def get(self, request: HttpRequest, user_id):
+
+        if request.user.is_authenticated:
+
+            current_user = User.objects.filter(id=user_id).first()
+
+            edit_form = UpdateEmployeeProfileForm(instance=current_user)
+
+            context = {
+                'edit_form': edit_form,
+                'user_id': user_id,
+            }
+
+            return render(request, 'Employee/EmployeeUpdateProfile.html', context)
+
+        else:
+            return HttpResponse('You are not allowed to access this page !')
+
+    def post(self, request: HttpRequest, user_id):
+
+        print('it is post')
+
+        current_user = User.objects.filter(id=user_id).first()
+
+        edit_form = UpdateEmployeeProfileForm(request.POST, instance=current_user)
+
+        if edit_form.is_valid():
+            edit_form.save(commit=True)
+
+            return redirect('EmployeeList')
+
+        context = {
+            'edit_form': edit_form,
+            'user_id': user_id,
+        }
+
+
+def remove_employee(request: HttpRequest, user_id):
+
+    employee = User.objects.filter(id=user_id).first()
+
+    employee.delete()
+
+    return redirect('EmployeeList')
