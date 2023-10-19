@@ -81,7 +81,8 @@ class EmployeeRegisterView(View):
 
 
 def PerCompanyEmployeesList(request):
-    employees: EmployeeModel = EmployeeModel.objects.filter(company=request.user.id).order_by('-id')
+
+    employees: EmployeeModel = EmployeeModel.objects.filter(company_id = request.user.id).order_by('-id')
 
     context = {
         "employees": employees,
