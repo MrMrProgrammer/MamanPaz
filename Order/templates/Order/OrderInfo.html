@@ -149,10 +149,10 @@
         $(function() {
             var today = new Date();
             var maxDate = new Date();
-            maxDate.setDate(today.getDate() + 14);
+            maxDate.setDate(today.getDate() + 10);
 
             $("#date").datepicker({
-                minDate: 0,
+                minDate: 1,
                 maxDate: maxDate,
                 dateFormat: "yy-mm-dd"
             });

@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
 from django.views import View
@@ -6,7 +8,8 @@ from BaseApp.models import User
 from SendMail.sendMail import send_email
 from .models import CompanyModel, CompanySchedule
 from .forms import UpdateCompanyProfileForm, UpdateAdditionalCompanyProfileForm
-import calendar
+from datetime import date
+from Food.models import FoodsModel
 
 
 # Create your views here.
@@ -152,50 +155,28 @@ def add_to_schedule(request: HttpRequest):
 
 
 def show_schedule(request: HttpRequest):
+    from collections import defaultdict
+
+    today = datetime.today()
+
     company: CompanyModel = CompanyModel.objects.filter(user_id=request.user.id).first()
-    company_schedule: CompanySchedule = CompanySchedule.objects.filter(company_id=company.id)
+    company_schedule = CompanySchedule.objects.filter(company_id=company.id, date__gte=today).order_by('date')
+    # company_schedule: CompanySchedule = CompanySchedule.objects.filter(company_id=company.id).order_by('date')
 
-    saturday = []
-    sunday = []
-    monday = []
-    tuesday = []
-    wednesday = []
-    thursday = []
-    friday = []
+    company_schedule_list = list(company_schedule)
 
-    for schedule in company_schedule:
+    date_to_food_id = defaultdict(list)
 
-        if schedule.date.strftime('%A') == 'Saturday':
-            saturday.append(schedule)
+    for schedule in company_schedule_list:
+        id = schedule.id
+        date = schedule.date
+        food: FoodsModel = schedule.food
+        date_to_food_id[date].append(food)
 
-        elif schedule.date.strftime('%A') == 'Sunday':
-            sunday.append(schedule)
-
-        elif schedule.date.strftime('%A') == 'Monday':
-            monday.append(schedule)
-
-        elif schedule.date.strftime('%A') == 'Tuesday':
-            tuesday.append(schedule)
-
-        elif schedule.date.strftime('%A') == 'Wednesday':
-            wednesday.append(schedule)
-
-        elif schedule.date.strftime('%A') == 'Thursday':
-            thursday.append(schedule)
-
-        elif schedule.date.strftime('%A') == 'Friday':
-            friday.append(schedule)
+    input_list = [[id, date, food_ids] for date, food_ids in date_to_food_id.items()]
 
     context = {
-        'company_schedule': company_schedule,
-
-        'saturday': saturday,
-        'sunday': sunday,
-        'monday': monday,
-        'tuesday': tuesday,
-        'wednesday': wednesday,
-        'thursday': thursday,
-        'friday': friday
+        'input_list': input_list
     }
 
     return render(request, 'Company/ShowSchedule.html', context)

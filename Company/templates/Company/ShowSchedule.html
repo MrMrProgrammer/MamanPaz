@@ -1,207 +1,53 @@
 {% extends 'base/layout.html' %}
 
-{% block HeaderLinks %}{% endblock %}
+{% block HeaderLinks %}
+    <style>
+        table tr {
+            background-color: #2bbde1;
+        }
+    </style>
+{% endblock %}
 
 {% block main %}
 
+    <br/>
+    <br/>
+
     <table class="table table-bordered text-center">
 
-        <tr>
+        <tr class="table-dark">
             <th>روزهای هفته</th>
             <th>غذاها</th>
             <th>حذف</th>
         </tr>
 
-        <tr>
-            <td rowspan="{{ saturday|length|add:1 }}">شنبه</td>
-        </tr>
+        {% for item in input_list %}
 
-        {% for item in saturday %}
             <tr>
-                {% if item.food %}
+                <td rowspan="{{ item.2|length|add:1 }}">
+                    {{ item.1|date:"l" }}
+                    <br/>
+                    ({{ item.1|date:"Y-m-d" }})
+                </td>
+            </tr>
+
+            {% for i in item.2 %}
+                <tr>
                     <td>
-                        <a target="_blank" href="{% url 'FoodDetails' food_id=item.food.id %}">
-                            {{ item.food }}
+                        <a target="_blank" href="{% url 'FoodDetails' food_id=i.id %}">
+                            {{ i }}
                         </a>
                     </td>
                     <td>
-                        <a href="{% url 'RemoveFromSchedule' item_id=item.id %}">
-                            delete
+                        <a href="#">
+                        {# {% url 'RemoveFromSchedule' item_id=item.0 %} #}
+                            *Delete*
                         </a>
                     </td>
-                {% else %}
-                    <td>{{ item.food }}</td>
-                    <td>ok</td>
-                {% endif %}
-            </tr>
+                </tr>
+            {% endfor %}
         {% endfor %}
-
-        {# =============================================================================== #}
-
-        <tr>
-            <td rowspan="{{ sunday|length|add:1 }}">یک شنبه</td>
-        </tr>
-
-        {% for item in sunday %}
-            <tr>
-                {% if item.food %}
-                    <td>{{ item.food }}</td>
-                    <td>ok</td>
-                {% else %}
-                    <td>ok</td>
-                    <td>ok</td>
-                {% endif %}
-            </tr>
-        {% endfor %}
-
-        {# =============================================================================== #}
-
-        <tr>
-            <td rowspan="{{ monday|length|add:1 }}">دوشنبه</td>
-        </tr>
-
-        {% for item in monday %}
-            <tr>
-                {% if item.food %}
-                    <td>{{ item.food }}</td>
-                    <td>ok</td>
-                {% else %}
-                    <td>ok</td>
-                    <td>ok</td>
-                {% endif %}
-            </tr>
-        {% endfor %}
-
-        {# =============================================================================== #}
-
-        <tr>
-            <td rowspan="{{ tuesday|length|add:1 }}">سه شنبه</td>
-        </tr>
-
-        {% for item in tuesday %}
-            <tr>
-                {% if item.food %}
-                    <td>{{ item.food }}</td>
-                    <td>ok</td>
-                {% else %}
-                    <td>ok</td>
-                    <td>ok</td>
-                {% endif %}
-            </tr>
-        {% endfor %}
-
-        {# =============================================================================== #}
-
-        <tr>
-            <td rowspan="{{ wednesday|length|add:1 }}">چهارشنبه</td>
-        </tr>
-
-        {% for item in wednesday %}
-            <tr>
-                {% if item.food %}
-                    <td>{{ item.food }}</td>
-                    <td>ok</td>
-                {% else %}
-                    <td>ok</td>
-                    <td>ok</td>
-                {% endif %}
-            </tr>
-        {% endfor %}
-
-        {# =============================================================================== #}
-
-        <tr>
-            <td rowspan="{{ thursday|length|add:1 }}">پنج شنبه</td>
-        </tr>
-
-        {% for item in thursday %}
-            <tr>
-                {% if item.food %}
-                    <td>{{ item.food }}</td>
-                    <td>ok</td>
-                {% else %}
-                    <td>ok</td>
-                    <td>ok</td>
-                {% endif %}
-            </tr>
-        {% endfor %}
-
-        {# =============================================================================== #}
-
-        <tr>
-            <td rowspan="{{ friday|length|add:1 }}">جمعه</td>
-        </tr>
-
-        {% for item in friday %}
-            <tr>
-                {% if item.food %}
-                    <td>{{ item.food }}</td>
-                    <td>ok</td>
-                {% else %}
-                    <td>ok</td>
-                    <td>ok</td>
-                {% endif %}
-            </tr>
-        {% endfor %}
-
-        {# =============================================================================== #}
-
     </table>
-
-    <br/>
-    <hr/>
-
-    {% for schedule in company_schedule %}
-        {{ schedule.date }}
-        {{ schedule.food.food_name }}
-
-        <br/>
-    {% endfor %}
-
-    <hr/>
-
-    <h3>شنبه</h3>
-    {% for food in saturday %}
-        {{ food }}
-        <br/>
-    {% endfor %}
-
-    <h3>یک شنبه</h3>
-    {% for food in sunday %}
-        {{ food }}
-        <br/>
-    {% endfor %}
-
-    <h3>دوشنبه</h3>
-    {% for food in monday %}
-        {{ food }}
-        <br/>
-    {% endfor %}
-
-    <h3>سه شنبه</h3>
-    {% for food in tuesday %}
-        {{ food }}
-        <br/>
-    {% endfor %}
-
-    <h3>چهارشنبه</h3>
-    {% for food in wednesday %}
-        {{ food }}
-        <br/>
-    {% endfor %}
-
-    <h3>پنج شنبه</h3>
-    {% for food in thursday %}
-        {{ food }}
-        <br/>
-    {% endfor %}
-
-    <h3>جمعه</h3>
-    {% for food in friday %}
-        {{ food }}
-        <br/>
-    {% endfor %}
-
 
 
 {% endblock %}
