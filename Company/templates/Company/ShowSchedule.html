@@ -24,7 +24,11 @@
                             {{ item.food }}
                         </a>
                     </td>
-                    <td>ok</td>
+                    <td>
+                        <a href="{% url 'RemoveFromSchedule' item_id=item.id %}">
+                            delete
+                        </a>
+                    </td>
                 {% else %}
                     <td>{{ item.food }}</td>
                     <td>ok</td>

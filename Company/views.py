@@ -155,9 +155,6 @@ def show_schedule(request: HttpRequest):
     company: CompanyModel = CompanyModel.objects.filter(user_id=request.user.id).first()
     company_schedule: CompanySchedule = CompanySchedule.objects.filter(company_id=company.id)
 
-    for i in company_schedule:
-        print(i.date.strftime('%A'))
-
     saturday = []
     sunday = []
     monday = []
@@ -189,14 +186,6 @@ def show_schedule(request: HttpRequest):
         elif schedule.date.strftime('%A') == 'Friday':
             friday.append(schedule)
 
-        print(saturday)
-        print(sunday)
-        print(monday)
-        print(tuesday)
-        print(wednesday)
-        print(thursday)
-        print(friday)
-
     context = {
         'company_schedule': company_schedule,
 
@@ -210,3 +199,15 @@ def show_schedule(request: HttpRequest):
     }
 
     return render(request, 'Company/ShowSchedule.html', context)
+
+
+def remove_from_schedule(request: HttpRequest, item_id):
+    print("==========================")
+    print(item_id)
+    print("==========================")
+
+    company = CompanyModel.objects.filter(user_id=request.user.id).first()
+    company_schedule = CompanySchedule.objects.filter(company_id=company.id)
+    company_schedule.filter(id=item_id).delete()
+
+    return redirect('ShowSchedule')
