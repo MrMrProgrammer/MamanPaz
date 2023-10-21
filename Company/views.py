@@ -6,6 +6,7 @@ from BaseApp.models import User
 from SendMail.sendMail import send_email
 from .models import CompanyModel, CompanySchedule
 from .forms import UpdateCompanyProfileForm, UpdateAdditionalCompanyProfileForm
+import calendar
 
 
 # Create your views here.
@@ -148,3 +149,64 @@ def add_to_schedule(request: HttpRequest):
     new_schedule.save()
 
     return HttpResponse('ok !')
+
+
+def show_schedule(request: HttpRequest):
+    company: CompanyModel = CompanyModel.objects.filter(user_id=request.user.id).first()
+    company_schedule: CompanySchedule = CompanySchedule.objects.filter(company_id=company.id)
+
+    for i in company_schedule:
+        print(i.date.strftime('%A'))
+
+    saturday = []
+    sunday = []
+    monday = []
+    tuesday = []
+    wednesday = []
+    thursday = []
+    friday = []
+
+    for schedule in company_schedule:
+
+        if schedule.date.strftime('%A') == 'Saturday':
+            saturday.append(schedule)
+
+        elif schedule.date.strftime('%A') == 'Sunday':
+            sunday.append(schedule)
+
+        elif schedule.date.strftime('%A') == 'Monday':
+            monday.append(schedule)
+
+        elif schedule.date.strftime('%A') == 'Tuesday':
+            tuesday.append(schedule)
+
+        elif schedule.date.strftime('%A') == 'Wednesday':
+            wednesday.append(schedule)
+
+        elif schedule.date.strftime('%A') == 'Thursday':
+            thursday.append(schedule)
+
+        elif schedule.date.strftime('%A') == 'Friday':
+            friday.append(schedule)
+
+        print(saturday)
+        print(sunday)
+        print(monday)
+        print(tuesday)
+        print(wednesday)
+        print(thursday)
+        print(friday)
+
+    context = {
+        'company_schedule': company_schedule,
+
+        'saturday': saturday,
+        'sunday': sunday,
+        'monday': monday,
+        'tuesday': tuesday,
+        'wednesday': wednesday,
+        'thursday': thursday,
+        'friday': friday
+    }
+
+    return render(request, 'Company/ShowSchedule.html', context)

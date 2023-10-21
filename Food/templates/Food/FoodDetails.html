@@ -73,9 +73,15 @@
 
                                 <br/>
 
-                                <button onclick="addToSchedule( {{ request.user.id }}, {{ food.id }} )"
+                                <button id="addToOrderBtn"
+                                        onclick="addToSchedule( {{ request.user.id }}, {{ food.id }} )"
                                         class="btn btn-success">افزودن به برنامه هفتگی
                                 </button>
+
+                                <button id="success" class="text-center btn btn-outline-primary">غذا به برنامه هفتگی
+                                    اضافه شد
+                                </button>
+
                             </div>
                             <div class="col-4"></div>
 

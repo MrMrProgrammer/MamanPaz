@@ -1,0 +1,60 @@
+{% extends 'base/layout.html' %}
+
+{% block HeaderLinks %}{% endblock %}
+
+{% block main %}
+
+    {% for schedule in company_schedule %}
+        {{ schedule.date }}
+        {{ schedule.food.food_name }}
+
+        <br/>
+    {% endfor %}
+
+    <hr/>
+
+    <h3>شنبه</h3>
+    {% for food in saturday %}
+        {{ food }}
+        <br/>
+    {% endfor %}
+
+    <h3>یک شنبه</h3>
+    {% for food in sunday %}
+        {{ food }}
+        <br/>
+    {% endfor %}
+
+    <h3>دوشنبه</h3>
+    {% for food in monday %}
+        {{ food }}
+        <br/>
+    {% endfor %}
+
+    <h3>سه شنبه</h3>
+    {% for food in tuesday %}
+        {{ food }}
+        <br/>
+    {% endfor %}
+
+    <h3>چهارشنبه</h3>
+    {% for food in wednesday %}
+        {{ food }}
+        <br/>
+    {% endfor %}
+
+    <h3>پنج شنبه</h3>
+    {% for food in thursday %}
+        {{ food }}
+        <br/>
+    {% endfor %}
+
+    <h3>جمعه</h3>
+    {% for food in friday %}
+        {{ food }}
+        <br/>
+    {% endfor %}
+
+
+
+{% endblock %}

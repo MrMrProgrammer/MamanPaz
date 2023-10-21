@@ -17,6 +17,7 @@ function addFoodToOrder(food_id) {
     var count = document.getElementById("counter").innerText;
 
     $.get('/order/add-to-order?food_id=' + food_id + '&count=' + count).then(res => {
+
         const addBtn = document.getElementById("addToOrderBtn");
         addBtn.style.display = "none";
 
@@ -72,12 +73,26 @@ function addToSchedule(user_id, food_id) {
     var date = document.getElementById("date").value;
 
     if (date != '') {
-        console.log(date);
-        console.log(user_id);
-        console.log(food_id);
 
         $.get('/company/AddToSchedule?date=' + date + '&user_id=' + user_id + '&food_id=' + food_id).then(res => {
-            console.log('ok');
+
+            const addBtn = document.getElementById("addToOrderBtn");
+            addBtn.style.display = "none";
+
+            const successBtn = document.getElementById("success");
+            successBtn.style.display = "inline-block";
+
+
+            setTimeout(function () {
+
+                const addBtn = document.getElementById("addToOrderBtn");
+                const successBtn = document.getElementById("success");
+
+                addBtn.style.display = "inline-block";
+                successBtn.style.display = "none";
+
+            }, 1500);
+
         });
 
     }
